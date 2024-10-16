@@ -1,0 +1,364 @@
+[gd_scene load_steps=39 format=3 uid="uid://c1n8xrti8afpc"]
+
+[ext_resource type="Script" path="res://objects/player/player.gd" id="1_oa43o"]
+[ext_resource type="PackedScene" uid="uid://c60wqnmed5dvi" path="res://objects/health/health.tscn" id="2_ohtop"]
+[ext_resource type="Script" path="res://addons/finite_state_machine/scripts/finite_state_machine.gd" id="2_p4q1k"]
+[ext_resource type="Script" path="res://objects/player/head.gd" id="3_kj3jh"]
+[ext_resource type="Script" path="res://objects/player/legs.gd" id="3_sof65"]
+[ext_resource type="Script" path="res://objects/player/climb.gd" id="4_2ehjw"]
+[ext_resource type="PackedScene" uid="uid://4ii4vbmr7jlp" path="res://objects/Debug/debug canon/debug_canon.tscn" id="4_bxglb"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Idle.gd" id="5_6pvtv"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Run.gd" id="6_q5vx6"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Air.gd" id="7_q0tn7"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Jump.gd" id="8_856fg"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Crouch.gd" id="9_84rn1"]
+[ext_resource type="Script" path="res://objects/effects/create_effects.gd" id="9_hroyd"]
+[ext_resource type="Script" path="res://objects/effects/predesignated_effect.gd" id="11_cg2gk"]
+[ext_resource type="Script" path="res://objects/effects/effected_properties.gd" id="13_7x3o6"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Mantle.gd" id="18_433q2"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oyfeb"]
+radius = 0.25
+height = 1.9
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p17bk"]
+radius = 0.249
+height = 0.517063
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rdl2t"]
+height = 0.1
+radius = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ckefi"]
+size = Vector3(0.4, 1.25, 0.3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_eue55"]
+radius = 0.25
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5qlqq"]
+radius = 0.248
+height = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ofnkf"]
+height = 0.5
+radius = 0.35
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u3y0t"]
+height = 0.5
+radius = 0.35
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mkr1h"]
+height = 0.8
+radius = 0.45
+
+[sub_resource type="Resource" id="Resource_14bbh"]
+script = ExtResource("13_7x3o6")
+property_modificator = 30.0
+modificator_mode = 1
+property_name = "acceleration"
+
+[sub_resource type="Resource" id="Resource_rsldj"]
+script = ExtResource("9_hroyd")
+predesignated_effects = Array[ExtResource("11_cg2gk")]([])
+custom_effects = Array[ExtResource("13_7x3o6")]([SubResource("Resource_14bbh")])
+create_timer = false
+timer_wait_time = 0.0
+
+[sub_resource type="Resource" id="Resource_plytf"]
+script = ExtResource("13_7x3o6")
+property_modificator = 5.0
+modificator_mode = 1
+property_name = "speed"
+
+[sub_resource type="Resource" id="Resource_uhjdf"]
+script = ExtResource("13_7x3o6")
+property_modificator = -85.0
+modificator_mode = 1
+property_name = "acceleration"
+
+[sub_resource type="Resource" id="Resource_jrw7k"]
+script = ExtResource("9_hroyd")
+predesignated_effects = Array[ExtResource("11_cg2gk")]([])
+custom_effects = Array[ExtResource("13_7x3o6")]([SubResource("Resource_plytf"), SubResource("Resource_uhjdf")])
+create_timer = false
+timer_wait_time = 0.0
+
+[sub_resource type="Resource" id="Resource_cymwl"]
+script = ExtResource("13_7x3o6")
+property_modificator = -68.0
+modificator_mode = 1
+property_name = "acceleration"
+
+[sub_resource type="Resource" id="Resource_wh4he"]
+script = ExtResource("9_hroyd")
+predesignated_effects = Array[ExtResource("11_cg2gk")]([])
+custom_effects = Array[ExtResource("13_7x3o6")]([SubResource("Resource_cymwl")])
+create_timer = false
+timer_wait_time = 0.0
+
+[sub_resource type="Resource" id="Resource_pmecb"]
+script = ExtResource("13_7x3o6")
+property_modificator = -40.0
+modificator_mode = 1
+property_name = "speed"
+
+[sub_resource type="Resource" id="Resource_jmco5"]
+script = ExtResource("13_7x3o6")
+property_modificator = 50.0
+modificator_mode = 1
+property_name = "acceleration"
+
+[sub_resource type="Resource" id="Resource_rceno"]
+script = ExtResource("9_hroyd")
+predesignated_effects = Array[ExtResource("11_cg2gk")]([])
+custom_effects = Array[ExtResource("13_7x3o6")]([SubResource("Resource_pmecb"), SubResource("Resource_jmco5")])
+create_timer = false
+timer_wait_time = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_mm6q2"]
+font_size = 34
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_3fvgk"]
+offsets = PackedFloat32Array(0, 0.421053)
+colors = PackedColorArray(0.0980392, 0.0980392, 0.0980392, 0.686275, 0.0156863, 0, 0.0784314, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8rvhj"]
+gradient = SubResource("Gradient_3fvgk")
+fill_from = Vector2(1, 1)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("legs", "head", "climb", "health")]
+collision_layer = 67
+script = ExtResource("1_oa43o")
+legs = NodePath("Legs")
+head = NodePath("Head")
+climb = NodePath("Climb")
+health = NodePath("Health")
+
+[node name="Health" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_ohtop")]
+parent = NodePath("..")
+
+[node name="StandCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_oyfeb")
+
+[node name="CrouchCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.300112, 0)
+shape = SubResource("CapsuleShape3D_p17bk")
+disabled = true
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("3_kj3jh")
+fov = 90.0
+
+[node name="HeadFreeSpaceCast" type="ShapeCast3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250672, 0)
+enabled = false
+shape = SubResource("CylinderShape3D_rdl2t")
+target_position = Vector3(0, 0.45, 0)
+
+[node name="Camera" type="Camera3D" parent="Head"]
+unique_name_in_owner = true
+transform = Transform3D(1, -2.98024e-08, -7.91442e-09, 2.98024e-08, 1, 6.75203e-09, 7.91442e-09, -6.75203e-09, 1, -7.59028e-08, 2.38419e-07, 2.5332e-07)
+cull_mask = 1048573
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Head/Camera"]
+transform = Transform3D(1, 2.98024e-08, 7.91442e-09, -2.98024e-08, 1, -6.75203e-09, -7.91442e-09, 6.75203e-09, 1, 0, 0, 0)
+light_color = Color(0.820366, 0.820366, 0.820366, 1)
+light_energy = 0.8
+omni_range = 15.0
+
+[node name="DebugCanon" parent="Head/Camera" instance=ExtResource("4_bxglb")]
+transform = Transform3D(1, -5.34384e-17, 0, -5.34384e-17, 1, 0, 0, 0, 1, -1.48235e-08, -0.178869, -1.19943)
+
+[node name="Climb" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("4_2ehjw")
+
+[node name="ObstacleHeight" type="RayCast3D" parent="Climb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.312405, -0.365159)
+target_position = Vector3(0, -1.35, 0)
+collision_mask = 64
+hit_back_faces = false
+debug_shape_custom_color = Color(0.271951, 0.866286, 1, 1)
+
+[node name="ObstacleObstr" type="RayCast3D" parent="Climb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.162644, -0.291806)
+target_position = Vector3(0, 0, -0.7)
+collision_mask = 65
+hit_back_faces = false
+debug_shape_custom_color = Color(0.271951, 0.866286, 1, 1)
+
+[node name="ObstacleObstr2" type="RayCast3D" parent="Climb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.162644, -0.195812)
+target_position = Vector3(0, 0, -0.7)
+collision_mask = 65
+hit_back_faces = false
+debug_shape_custom_color = Color(0.271951, 0.866286, 1, 1)
+
+[node name="ObstacleDetector" type="ShapeCast3D" parent="Climb"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.333946, -0.248098)
+shape = SubResource("BoxShape3D_ckefi")
+target_position = Vector3(0, 0, -0.25)
+collision_mask = 65
+debug_shape_custom_color = Color(0.271951, 0.866286, 1, 1)
+
+[node name="HeightSpringArm" type="SpringArm3D" parent="Climb"]
+transform = Transform3D(1, -4.37114e-08, 4.37114e-08, 4.37114e-08, -4.37114e-08, -1, 4.37114e-08, 1, -4.37114e-08, 0, 1.26916, -0.412127)
+collision_mask = 65
+shape = SubResource("SphereShape3D_eue55")
+spring_length = 2.25
+
+[node name="FreeSpaceContainer" type="Node3D" parent="Climb/HeightSpringArm"]
+
+[node name="FreeSpaceStanding" type="ShapeCast3D" parent="Climb/HeightSpringArm/FreeSpaceContainer"]
+unique_name_in_owner = true
+transform = Transform3D(1, 4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 4.37114e-08, -1, -4.37114e-08, 9.06192e-08, 0.0152814, -0.91247)
+shape = SubResource("CapsuleShape3D_oyfeb")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(4.81308e-08, 0.668004, 0.481005, 1)
+
+[node name="FreeSpaceCrouch" type="ShapeCast3D" parent="Climb/HeightSpringArm/FreeSpaceContainer"]
+unique_name_in_owner = true
+transform = Transform3D(1, 4.37114e-08, 4.37114e-08, -4.37114e-08, -4.37114e-08, 1, 4.37114e-08, -1, -4.37114e-08, 6.54852e-08, 0.0152815, -0.33747)
+shape = SubResource("CapsuleShape3D_p17bk")
+target_position = Vector3(0, 0, 0)
+debug_shape_custom_color = Color(0.562039, 0.0039935, 0.972096, 1)
+
+[node name="Legs" type="Node3D" parent="."]
+script = ExtResource("3_sof65")
+
+[node name="FloorCast" type="ShapeCast3D" parent="Legs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.301, 0)
+enabled = false
+shape = SubResource("CapsuleShape3D_5qlqq")
+target_position = Vector3(0, -0.68, 0)
+
+[node name="FloorRay" type="RayCast3D" parent="Legs/FloorCast"]
+enabled = false
+target_position = Vector3(0, -0.45, 0)
+
+[node name="StairsCast" type="ShapeCast3D" parent="Legs"]
+transform = Transform3D(0.999996, 0, -0.00274016, 0, 1, 0, 0.00274016, 0, 0.999996, 0, 0.281829, 0)
+enabled = false
+shape = SubResource("CylinderShape3D_ofnkf")
+target_position = Vector3(0, 0, 0)
+
+[node name="StairsBeneath" type="ShapeCast3D" parent="Legs/StairsCast"]
+enabled = false
+shape = SubResource("CylinderShape3D_u3y0t")
+target_position = Vector3(0, -0.5, 0)
+
+[node name="FreeSpaceRayCast" type="RayCast3D" parent="Legs/StairsCast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+enabled = false
+target_position = Vector3(0, 0, -0.75)
+
+[node name="StairsFloorRayCast" type="RayCast3D" parent="Legs/StairsCast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+enabled = false
+
+[node name="StairsNear" type="ShapeCast3D" parent="Legs/StairsCast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.151852, 0)
+enabled = false
+shape = SubResource("CylinderShape3D_mkr1h")
+target_position = Vector3(0, 0, 0)
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+unique_name_in_owner = true
+script = ExtResource("2_p4q1k")
+current_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("5_6pvtv")
+
+[node name="Run" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("6_q5vx6")
+state_effects = SubResource("Resource_rsldj")
+
+[node name="Air" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("7_q0tn7")
+state_effects = SubResource("Resource_jrw7k")
+can_jump_in_this_state = false
+
+[node name="CoyoteTimer" type="Timer" parent="FiniteStateMachine/Air"]
+process_callback = 0
+wait_time = 0.2
+one_shot = true
+
+[node name="Jump" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("8_856fg")
+state_effects = SubResource("Resource_wh4he")
+can_jump_in_this_state = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FiniteStateMachine/Jump"]
+volume_db = 5.0
+
+[node name="Crouch" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("9_84rn1")
+state_effects = SubResource("Resource_rceno")
+can_jump_in_this_state = false
+can_crouch_in_this_state = false
+
+[node name="Mantle" type="Node" parent="FiniteStateMachine"]
+unique_name_in_owner = true
+script = ExtResource("18_433q2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FiniteStateMachine/Mantle"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Peer" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -125.0
+offset_top = 32.0
+offset_right = -34.0
+offset_bottom = 55.0
+grow_horizontal = 0
+text = "Хост лох"
+
+[node name="Label2" type="Label" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 20.0
+offset_top = 349.0
+offset_right = 290.0
+offset_bottom = 419.0
+text = "NTRCN TRNMCG"
+label_settings = SubResource("LabelSettings_mm6q2")
+horizontal_alignment = 2
+
+[node name="CrouchVinette" type="TextureRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("GradientTexture2D_8rvhj")
+
+[node name="Death" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.682468, 0.315204, 0.588543, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[connection signal="final_blow" from="Health" to="." method="death"]
+[connection signal="update_ledge" from="Climb" to="FiniteStateMachine/Mantle" method="get_mantle_point"]
+[connection signal="timeout" from="FiniteStateMachine/Air/CoyoteTimer" to="FiniteStateMachine/Air" method="coyote_disable_jump"]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8ipvqjdlnwt4"]
+
+[ext_resource type="Script" path="res://objects/effects/Effect.gd" id="1_1720k"]
+[ext_resource type="Script" path="res://objects/effects/effected_properties.gd" id="2_4o5ig"]
+
+[sub_resource type="Resource" id="Resource_4bq5x"]
+script = ExtResource("2_4o5ig")
+property_modificator = 0.0
+modificator_mode = 0
+property_name = "Debug"
+
+[node name="Effect" type="Node" groups=["effects"]]
+script = ExtResource("1_1720k")
+properties_array = Array[ExtResource("2_4o5ig")]([SubResource("Resource_4bq5x")])

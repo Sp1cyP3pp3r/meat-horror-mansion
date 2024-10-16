@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpo21h2mvsorv"]
+
+[ext_resource type="Script" path="res://objects/aura/damage_zone.gd" id="1_n80v5"]
+[ext_resource type="Script" path="res://objects/Effects/create_effects.gd" id="2_fxdcp"]
+
+[sub_resource type="Resource" id="Resource_j5mge"]
+script = ExtResource("2_fxdcp")
+predesignated_effects = Array[PackedScene]([])
+custom_effects = Array[Resource("res://objects/Effects/effected_properties.gd")]([])
+create_timer = false
+timer_wait_time = 0.0
+
+[node name="DamageZone" type="Area2D"]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_n80v5")
+create_effects = SubResource("Resource_j5mge")
+
+[node name="DealDamageTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="damage_entity"]
+[connection signal="body_exited" from="." to="." method="discard_entity"]
+[connection signal="timeout" from="DealDamageTimer" to="." method="_on_deal_damage_timer_timeout"]

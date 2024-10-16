@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpoyuqyr285bk"]
+
+[ext_resource type="Script" path="res://objects/aura/aura_effect.gd" id="1_o4l0t"]
+
+[node name="AuraEffect" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 240, 180, 0)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_o4l0t")
+metadata/_edit_group_ = true
+
+[connection signal="body_entered" from="." to="." method="add_entity"]
+[connection signal="body_exited" from="." to="." method="remove_entity"]

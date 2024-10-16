@@ -1,0 +1,317 @@
+[gd_scene load_steps=33 format=3 uid="uid://c1n8xrti8afpc"]
+
+[ext_resource type="Script" path="res://objects/player/player.gd" id="1_oa43o"]
+[ext_resource type="PackedScene" uid="uid://c60wqnmed5dvi" path="res://objects/health/health.tscn" id="2_ohtop"]
+[ext_resource type="Script" path="res://addons/finite_state_machine/scripts/finite_state_machine.gd" id="2_p4q1k"]
+[ext_resource type="Script" path="res://objects/player/head.gd" id="3_kj3jh"]
+[ext_resource type="Script" path="res://objects/player/legs.gd" id="3_sof65"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Idle.gd" id="5_6pvtv"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Run.gd" id="6_q5vx6"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Walk.gd" id="7_ivjc6"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Air.gd" id="7_q0tn7"]
+[ext_resource type="Script" path="res://objects/player/StateMachine/Crouch.gd" id="9_84rn1"]
+[ext_resource type="Script" path="res://objects/effects/predesignated_effect.gd" id="11_cg2gk"]
+[ext_resource type="Script" path="res://objects/effects/effected_properties.gd" id="13_7x3o6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oyfeb"]
+radius = 0.25
+height = 1.9
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p17bk"]
+radius = 0.249
+height = 0.517063
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rdl2t"]
+height = 0.1
+radius = 0.2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5qlqq"]
+radius = 0.248
+height = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ofnkf"]
+height = 0.5
+radius = 0.35
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_u3y0t"]
+height = 0.5
+radius = 0.35
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mkr1h"]
+height = 0.8
+radius = 0.45
+
+[sub_resource type="Resource" id="Resource_gpiqy"]
+script = ExtResource("13_7x3o6")
+property_modificator = 5.0
+modificator_mode = 1
+property_name = "speed"
+
+[sub_resource type="GDScript" id="GDScript_027b8"]
+script/source = "extends Resource
+class_name CreateEffects
+
+@export var predesignated_effects : Array[PredesignatedEffect]
+@export var custom_effects : Array[EffectedProperties]
+@export var create_timer : bool = false
+@export_range(0, 100, 0.025) var timer_wait_time : float = 0
+
+var effects_array : Array[Effect] = []
+
+func add_effects(affected_object, override_properties : Dictionary = {})\\
+ -> Array[Effect]:
+	effects_array.clear()
+	if predesignated_effects.is_empty() and custom_effects.is_empty():
+		#print(str(self.name) + \" does not contain effects\")
+		return []
+	if not custom_effects.is_empty():
+		var new_effect = create_custom_effect(override_properties)
+		if create_timer:
+			create_effect_timer(new_effect)
+		affected_object.add_child(new_effect)
+	
+	if not predesignated_effects.is_empty():
+		create_predesignated_effects(affected_object, override_properties)
+	
+	return effects_array.duplicate()
+
+func create_custom_effect(override_properties) -> Effect:
+	var new_effect = Effect.new()
+	for effected_properties in custom_effects:
+		var _dict : EffectedProperties = effected_properties.duplicate()
+		if effected_properties.property_name in override_properties.keys():
+			_dict.property_modificator = override_properties[effected_properties.property_name]
+		new_effect.properties_array.append(_dict)
+	effects_array.append(new_effect)
+	return new_effect
+
+func create_predesignated_effects(affected_object, override_properties) -> void:
+	for predefined_effect in predesignated_effects:
+		var scene = predefined_effect.effect_scene
+		var created_effect = scene.instantiate()
+		var dict = predefined_effect.eff_dict
+		for property in dict.keys():
+			var _prop : Variant = dict[property]
+			if property in override_properties.keys():
+				_prop = override_properties[property]
+			if property in created_effect:
+					created_effect.set(property, _prop)
+		if create_timer:
+			create_effect_timer(created_effect)
+		effects_array.append(created_effect)
+		affected_object.add_child(created_effect)
+
+func create_effect_timer(effect) -> void:
+	var new_timer = Timer.new()
+	new_timer.wait_time = timer_wait_time
+	new_timer.connect(&\"timeout\", Callable(effect, &\"discard_effects\"))
+	new_timer.one_shot = true
+	new_timer.autostart = true
+	effect.add_child(new_timer)
+"
+
+[sub_resource type="Resource" id="Resource_yasy4"]
+script = SubResource("GDScript_027b8")
+predesignated_effects = Array[ExtResource("11_cg2gk")]([])
+custom_effects = Array[ExtResource("13_7x3o6")]([SubResource("Resource_gpiqy")])
+create_timer = false
+timer_wait_time = 0.0
+
+[sub_resource type="Resource" id="Resource_14bbh"]
+script = ExtResource("13_7x3o6")
+property_modificator = 30.0
+modificator_mode = 1
+property_name = "acceleration"
+
+[sub_resource type="Resource" id="Resource_rsldj"]
+script = SubResource("GDScript_027b8")
+predesignated_effects = Array[ExtResource("11_cg2gk")]([])
+custom_effects = Array[ExtResource("13_7x3o6")]([SubResource("Resource_14bbh")])
+create_timer = false
+timer_wait_time = 0.0
+
+[sub_resource type="Resource" id="Resource_plytf"]
+script = ExtResource("13_7x3o6")
+property_modificator = 5.0
+modificator_mode = 1
+property_name = "speed"
+
+[sub_resource type="Resource" id="Resource_uhjdf"]
+script = ExtResource("13_7x3o6")
+property_modificator = -85.0
+modificator_mode = 1
+property_name = "acceleration"
+
+[sub_resource type="Resource" id="Resource_jrw7k"]
+script = SubResource("GDScript_027b8")
+predesignated_effects = Array[ExtResource("11_cg2gk")]([])
+custom_effects = Array[ExtResource("13_7x3o6")]([SubResource("Resource_plytf"), SubResource("Resource_uhjdf")])
+create_timer = false
+timer_wait_time = 0.0
+
+[sub_resource type="Resource" id="Resource_pmecb"]
+script = ExtResource("13_7x3o6")
+property_modificator = -40.0
+modificator_mode = 1
+property_name = "speed"
+
+[sub_resource type="Resource" id="Resource_jmco5"]
+script = ExtResource("13_7x3o6")
+property_modificator = 50.0
+modificator_mode = 1
+property_name = "acceleration"
+
+[sub_resource type="Resource" id="Resource_rceno"]
+script = SubResource("GDScript_027b8")
+predesignated_effects = Array[ExtResource("11_cg2gk")]([])
+custom_effects = Array[ExtResource("13_7x3o6")]([SubResource("Resource_pmecb"), SubResource("Resource_jmco5")])
+create_timer = false
+timer_wait_time = 0.0
+
+[sub_resource type="Gradient" id="Gradient_3fvgk"]
+offsets = PackedFloat32Array(0, 0.421053)
+colors = PackedColorArray(0.0980392, 0.0980392, 0.0980392, 0.686275, 0.0156863, 0, 0.0784314, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8rvhj"]
+gradient = SubResource("Gradient_3fvgk")
+fill_from = Vector2(1, 1)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("legs", "head", "health")]
+collision_layer = 67
+script = ExtResource("1_oa43o")
+legs = NodePath("Legs")
+head = NodePath("Head")
+health = NodePath("Health")
+
+[node name="Health" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_ohtop")]
+parent = NodePath("..")
+
+[node name="StandCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_oyfeb")
+
+[node name="CrouchCollision" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.300112, 0)
+shape = SubResource("CapsuleShape3D_p17bk")
+disabled = true
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("3_kj3jh")
+fov = 90.0
+
+[node name="HeadFreeSpaceCast" type="ShapeCast3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250672, 0)
+enabled = false
+shape = SubResource("CylinderShape3D_rdl2t")
+target_position = Vector3(0, 0.45, 0)
+
+[node name="Camera" type="Camera3D" parent="Head"]
+unique_name_in_owner = true
+transform = Transform3D(1, -2.98024e-08, -7.91442e-09, 2.98024e-08, 1, 6.75203e-09, 7.91442e-09, -6.75203e-09, 1, -7.59028e-08, 2.38419e-07, 2.38419e-07)
+cull_mask = 1048573
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Head/Camera"]
+transform = Transform3D(1, 2.98024e-08, 7.91442e-09, -2.98024e-08, 1, -6.75203e-09, -7.91442e-09, 6.75203e-09, 1, 0, 0, 0)
+light_color = Color(0.820366, 0.820366, 0.820366, 1)
+light_energy = 0.8
+omni_range = 15.0
+
+[node name="Legs" type="Node3D" parent="."]
+script = ExtResource("3_sof65")
+
+[node name="FloorCast" type="ShapeCast3D" parent="Legs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.301, 0)
+enabled = false
+shape = SubResource("CapsuleShape3D_5qlqq")
+target_position = Vector3(0, -0.68, 0)
+
+[node name="FloorRay" type="RayCast3D" parent="Legs/FloorCast"]
+enabled = false
+target_position = Vector3(0, -0.45, 0)
+
+[node name="StairsCast" type="ShapeCast3D" parent="Legs"]
+transform = Transform3D(0.999996, 0, -0.00274016, 0, 1, 0, 0.00274016, 0, 0.999996, 0, 0.281829, 0)
+enabled = false
+shape = SubResource("CylinderShape3D_ofnkf")
+target_position = Vector3(0, 0, 0)
+
+[node name="StairsBeneath" type="ShapeCast3D" parent="Legs/StairsCast"]
+enabled = false
+shape = SubResource("CylinderShape3D_u3y0t")
+target_position = Vector3(0, -0.5, 0)
+
+[node name="FreeSpaceRayCast" type="RayCast3D" parent="Legs/StairsCast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+enabled = false
+target_position = Vector3(0, 0, -0.75)
+
+[node name="StairsFloorRayCast" type="RayCast3D" parent="Legs/StairsCast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+enabled = false
+
+[node name="StairsNear" type="ShapeCast3D" parent="Legs/StairsCast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.151852, 0)
+enabled = false
+shape = SubResource("CylinderShape3D_mkr1h")
+target_position = Vector3(0, 0, 0)
+
+[node name="FiniteStateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+unique_name_in_owner = true
+script = ExtResource("2_p4q1k")
+current_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("5_6pvtv")
+
+[node name="Walk" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("7_ivjc6")
+state_effects = SubResource("Resource_yasy4")
+
+[node name="Run" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("6_q5vx6")
+state_effects = SubResource("Resource_rsldj")
+
+[node name="Air" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("7_q0tn7")
+state_effects = SubResource("Resource_jrw7k")
+
+[node name="Crouch" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("9_84rn1")
+state_effects = SubResource("Resource_rceno")
+can_crouch_in_this_state = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="CrouchVinette" type="TextureRect" parent="CanvasLayer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("GradientTexture2D_8rvhj")
+
+[node name="Death" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.682468, 0.315204, 0.588543, 1)
+
+[node name="CurrentState" type="Label" parent="CanvasLayer"]
+offset_left = 72.0
+offset_top = 511.0
+offset_right = 112.0
+offset_bottom = 534.0
+text = "State"
+
+[connection signal="final_blow" from="Health" to="." method="death"]
