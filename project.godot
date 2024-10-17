@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="Meat Horror Mansion"
+config/tags=PackedStringArray("current")
 run/main_scene="res://debug/gameplay_garden.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
-config/tags=PackedStringArray("current")
 
 [autoload]
 

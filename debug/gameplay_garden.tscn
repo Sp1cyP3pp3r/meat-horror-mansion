@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://bm6a5s7oik0fe"]
+[gd_scene load_steps=16 format=3 uid="uid://bm6a5s7oik0fe"]
 
 [ext_resource type="Texture2D" uid="uid://yi0of6w2raqr" path="res://textures/skybox_test.jpg" id="1_y57w1"]
 [ext_resource type="Texture2D" uid="uid://nhw5n2gt7q47" path="res://textures/floor_tile_test.jpg" id="2_fss3v"]
 [ext_resource type="PackedScene" uid="uid://c1n8xrti8afpc" path="res://objects/player/player.tscn" id="3_570sf"]
+[ext_resource type="PackedScene" uid="uid://cdw67aph3j8dn" path="res://objects/monster/monster.tscn" id="4_46tj2"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_p4n20"]
 panorama = ExtResource("1_y57w1")
@@ -55,6 +56,11 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k7lfh")
 
+[node name="Monster" parent="." instance=ExtResource("4_46tj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71223, 2.56024, -8.57994)
+
+[node name="Player" parent="." instance=ExtResource("3_570sf")]
+
 [node name="floor" type="StaticBody3D" parent="."]
 metadata/_edit_group_ = true
 
@@ -65,8 +71,6 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0622559, 0)
 shape = SubResource("BoxShape3D_0lhur")
-
-[node name="Player" parent="." instance=ExtResource("3_570sf")]
 
 [node name="Obstacle" type="StaticBody3D" parent="."]
 transform = Transform3D(0.74774, 0, -0.663992, 0, 1, 0, 0.663992, 0, 0.74774, -7.49646, 2.50024, -2.58484)
