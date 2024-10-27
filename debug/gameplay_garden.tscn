@@ -1,33 +1,20 @@
-[gd_scene load_steps=16 format=3 uid="uid://bm6a5s7oik0fe"]
+[gd_scene load_steps=25 format=3 uid="uid://bm6a5s7oik0fe"]
 
 [ext_resource type="Texture2D" uid="uid://yi0of6w2raqr" path="res://textures/skybox_test.jpg" id="1_y57w1"]
+[ext_resource type="PackedScene" uid="uid://b2f4400kxjxnw" path="res://debug/test_torch.tscn" id="2_egmef"]
 [ext_resource type="Texture2D" uid="uid://nhw5n2gt7q47" path="res://textures/floor_tile_test.jpg" id="2_fss3v"]
 [ext_resource type="PackedScene" uid="uid://c1n8xrti8afpc" path="res://objects/player/player.tscn" id="3_570sf"]
 [ext_resource type="PackedScene" uid="uid://cdw67aph3j8dn" path="res://objects/monster/monster.tscn" id="4_46tj2"]
+[ext_resource type="PackedScene" uid="uid://c7dwc4gekcep1" path="res://debug/debug_table.tscn" id="8_jjekt"]
+[ext_resource type="PackedScene" uid="uid://bc60utyfpyt47" path="res://debug/door_debug.tscn" id="8_sxrfj"]
+[ext_resource type="PackedScene" uid="uid://xkkm1ghtobaa" path="res://objects/InterestPoint/interest_point.tscn" id="9_f6trn"]
+[ext_resource type="PackedScene" uid="uid://bqgiicwljhink" path="res://debug/debug_closet.tscn" id="9_fxoey"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_p4n20"]
-panorama = ExtResource("1_y57w1")
-
-[sub_resource type="Sky" id="Sky_r6cqj"]
-sky_material = SubResource("PanoramaSkyMaterial_p4n20")
-
-[sub_resource type="Environment" id="Environment_k7lfh"]
-background_mode = 2
-sky = SubResource("Sky_r6cqj")
-tonemap_mode = 2
-glow_enabled = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwgjc"]
-albedo_texture = ExtResource("2_fss3v")
-uv1_scale = Vector3(3, 3, 3)
-uv1_triplanar = true
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_wt2xg"]
-material = SubResource("StandardMaterial3D_cwgjc")
-size = Vector2(125, 125)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_0lhur"]
-size = Vector3(125, 0.125, 125)
+[sub_resource type="NavigationMesh" id="NavigationMesh_i8ktj"]
+vertices = PackedVector3Array(-34.5, 0.431713, -27.25, -30.5, 0.431713, -27.25, -30, 0.431713, -28.25, -28.75, 0.431713, -34.5, -34.5, 0.431713, -34.5, -28.75, 0.431713, -27.75, -23, 0.431713, -22.5, -21.75, 0.431713, -22.75, -21.75, 0.431713, -23.5, -20.75, 0.431713, -24.75, -17, 0.431713, -29, -15.75, 0.431713, -29.75, -15.75, 0.431713, -34.5, -17, 0.431713, -28.5, -14.75, 0.431713, -29.25, -14.75, 0.431713, -28.5, -11, 0.431713, -27.25, -9, 0.431713, -29.75, -7.5, 0.431713, -30.75, -7.5, 0.431713, -34.5, -7.5, 0.431713, -20.5, -6.75, 0.431713, -20.5, -5.75, 0.431713, -21.75, -9, 0.431713, -24.25, -11.25, 0.431713, -24, -6.5, 0.431713, -29.25, -7.5, 0.431713, -25.75, -1.5, 0.431713, -20.5, -6.5, 0.431713, -30.25, 2.25, 0.431713, -22.75, 5.5, 0.431713, -29, 6.5, 0.431713, -34.5, -8.75, 0.431713, -25.5, 2, 0.431713, -21.5, 6.5, 0.431713, -29.75, 6.5, 0.431713, -27.25, 5.5, 0.431713, -28.25, 13.25, 0.431713, -24.25, 13, 0.431713, -23, 13.25, 0.431713, -23, 14.5, 0.431713, -23.25, 15, 0.431713, -22.25, 34.5, 0.431713, -22.25, 8.25, 0.431713, -28.75, 34.5, 0.431713, -34.5, -3, 5.68171, -19.75, -2.25, 5.68171, -19.75, -2.25, 5.68171, -20.75, -1.25, 5.68171, -22, -1.75, 5.68171, -22, -4, 5.68171, -18.75, -9.5, 5.68171, -12.25, -12.5, 5.68171, -31.75, -18, 5.68171, -26, -29.5, 5.68171, -24.5, -31.25, 5.68171, -23, -31.25, 5.68171, -22.5, -27.5, 5.68171, -26.75, -28.5, 5.68171, -26.25, -25, 5.68171, -29.5, -25.75, 5.68171, -29.25, -26.25, 5.68171, -18, -19.75, 5.68171, -24.75, -12.5, 0.431713, -19.5, -10.75, 0.431713, -21, -13.5, 0.431713, -23.25, -18, 0.431713, -24.25, -13.5, 0.431713, -24.5, -17.5, 0.431713, -25.5, -34.5, 0.431713, -17, -31.75, 0.431713, -17, -31.5, 0.431713, -17.75, -28.25, 0.431713, -24.5, -30.5, 0.431713, -18, -24.25, 0.431713, -18.75, -24.75, 0.431713, -21.75, 8.5, 5.68171, -17, 9.25, 5.68171, -17, 13.25, 5.68171, -21.5, 7.5, 5.68171, -26.75, 3.25, 5.68171, -22.25, 3.25, 5.68171, -21.75, -28.5, 5.68171, -14, -28.5, 5.68171, -13.25, -27.75, 5.68171, -13, -21.75, 5.68171, -7.5, -21.75, 5.43171, -6.5, -20.75, 5.68171, -6.75, -15.25, 5.68171, -5, -14.5, 5.43171, -4, -12.75, 5.43171, -3.75, -12, 5.43171, -7.5, -13, 5.68171, -7.75, -23.5, 5.68171, -9.25, -19, 5.68171, -24.75, -25.75, 5.68171, -16.75, -13, 5.68171, -8.5, -16, 5.68171, -5, -25.25, 5.68171, -10, -17.25, 5.68171, -3.5, 11.75, 0.431713, -22.75, 9.25, 0.431713, -18.25, 9, 0.431713, -25.5, 7.75, 0.431713, -26, 4.5, 0.431713, -22, 8.25, 0.431713, -18.5, -21.5, 0.431713, -22.25, -22, 0.431713, -14.25, -20.75, 0.431713, -14.5, -20.75, 0.431713, -15.75, -21.5, 0.431713, -17, -20.25, 0.431713, -22, -21.5, 0.431713, -18.75, -12.5, 0.431713, -18.5, -10, 0.431713, -16.75, -8.25, 0.431713, -19, -20, 0.431713, -16.25, -14.5, 0.431713, -17, -13.25, 0.431713, -18, -15.75, 0.431713, -20, -19.25, 0.431713, -23, -15.75, 0.431713, -19.5, 10, 0.431713, -16.25, 11, 0.431713, -10, 15.5, 0.431713, -11.5, 16.5, 0.431713, -11.25, 34.5, 0.431713, -11.25, -1.25, 0.431713, -19.25, 0.75, 0.431713, -14.5, 1, 0.431713, -14, 7, 0.431713, -17.25, -2.25, 0.431713, -18.75, -2.25, 0.431713, -15, -3.25, 0.431713, -14.75, -4.5, 0.431713, -20.25, -8.5, 0.431713, -15.75, -3.75, 0.431713, -12, -9.25, 0.431713, -12.25, 8.25, 0.431713, -8.75, 9, 0.431713, -6.75, 10.75, 0.431713, -7.25, 10.25, 0.431713, -9.5, 8.5, 0.431713, -15.75, 3.75, 0.431713, -7.75, 9.75, 0.431713, -15.75, 0.25, 0.431713, -9.75, -31, 0.431713, -14.5, -30.25, 0.431713, -14.75, -30.5, 0.431713, -16, -31.5, 0.431713, -16, -34.5, 0.431713, -7.75, -30.25, 0.431713, -8, -22.25, 0.431713, -13.75, -29.25, 0.431713, -14.5, -26.75, 0.431713, -15.25, -24, 0.431713, -17, -17.25, 0.431713, -12.75, -17.25, 0.431713, -14.75, -19.25, 0.431713, -14.25, -24.75, 0.431713, -11.75, -27, 0.431713, -13.75, -28.25, 0.431713, -7.25, -26.25, 0.431713, -8.25, -23.75, 0.431713, -14, -25.25, 0.431713, -15.25, -12.25, 0.431713, -13.75, -12.25, 0.431713, -13, -10.75, 0.431713, -12.75, -10.25, 0.431713, -14.25, -10.5, 0.431713, -15.5, -11.75, 0.431713, -15.5, -16.75, 0.431713, -12.5, -13.75, 0.431713, -12.25, -13.25, 0.431713, -15.25, -17, 0.431713, -11, -19.25, 0.431713, -10.75, -19.25, 0.431713, -9.75, -11.5, 0.431713, -8.5, -11.5, 0.431713, -11.5, 0, 5.43171, -13, 0, 5.43171, -13.5, -2.25, 5.43171, -14, -2.75, 5.43171, -11.75, -2.75, 5.43171, -10.75, -0.5, 5.43171, -10.5, -2.5, 0.431713, -11.5, -2.5, 0.431713, -11, -0.75, 0.431713, -10.75, -0.5, 0.431713, -12, -0.5, 0.431713, -13.25, -2, 0.431713, -13.5, -9.75, 0.431713, -11.25, -11, 0.431713, -8.25, -7.75, 0.431713, -5.75, -6.75, 0.431713, -5.75, -4, 0.431713, -10, -11, 0.431713, -6.75, -11.75, 0.431713, -3.25, -10.25, 0.431713, -3, -5.25, 0.431713, -4.25, -3.5, 0.431713, -9.75, 4.5, 5.43171, -6.75, 4.5, 5.43171, -6, 5.25, 5.43171, -4.5, 16, 1.43171, -8.25, 16, 1.18171, -10.25, 8.33333, 5.18171, -7.91667, 7.9375, 5.43171, -5.4375, 9.28125, 4.93171, -5.90625, 17.25, 0.681713, -8.25, 17.25, 0.681713, -7.75, 34.5, 0.431713, -7.75, 16.5, 0.931713, -10.5, -20, 0.431713, -9.5, -21.25, 0.431713, -10.5, -20.5, 0.431713, -2.75, -19.5, 0.431713, -2.5, -19, 0.431713, -3.25, -19.75, 0.431713, -8, -17.75, 0.431713, -3.25, -16, 0.431713, -5.25, -15.5, 0.431713, -7.25, -17.5, 0.431713, -2.75, -15.75, 0.431713, -3.25, -26, 0.431713, -6.5, -28.25, 0.431713, -6, -34.5, 0.431713, -1.25, -29.25, 0.431713, -1.5, -29.75, 0.431713, -1.75, -24.5, 0.431713, -6.25, -29.75, 0.431713, -5.5, -29.5, 0.431713, -3.25, -22.5, 0.431713, -4.25, -23, 0.431713, -9.75, -24.5, 0.431713, -10, 3.25, 0.431713, -7.25, 0, 0.431713, -9.25, -4.5, 0.431713, -3.5, 3.75, 0.431713, -4.75, -1.25, 0.431713, -9.25, 11.25, 0.431713, -5.75, 9, 0.431713, -4.5, 17.25, 0.431713, -7.25, 12.75, 0.431713, -5.75, 9.25, 0.431713, 4, 15, 0.431713, 13.5, 34.5, 0.431713, 13.5, 8.75, 0.431713, 5.5, 6.5, 0.431713, 6.5, 7, 0.431713, 7.75, 10.75, 0.431713, 9, 7.75, 0.431713, 1, 6, 0.431713, -3.75, 6.25, 0.431713, 0.5, 5.25, 0.431713, -5, 7.75, 0.431713, -5.75, 7.25, 0.431713, -7.25, 4.75, 0.431713, -6.5, -12.5, 0.431713, -6.25, -12.5, 0.431713, -6.75, -14.25, 0.431713, -7, -14.5, 0.431713, -5.75, -14.5, 0.431713, -4.5, -13, 0.431713, -4, 4.5, 0.431713, -3.5, 4.25, 0.431713, 1.5, -4.5, 0.431713, -2.5, -6, 0.431713, -0.75, -8.25, 5.43171, -3.5, -7, 5.43171, -1.5, -5.75, 5.43171, -2.75, -7, 5.43171, -4.5, -7.5, 0.431713, -1.25, -6.25, 0.431713, -2.75, -7.25, 0.431713, -4, -9, 0.431713, -2.25, -12, 0.431713, -2.75, -10.5, 0.431713, -1.5, -12, 0.431713, 2.5, -8, 0.431713, 0.5, -12.5, 0.431713, 1.75, -14, 0.431713, -2.75, -14.5, 0.431713, 2.25, -17, 0.431713, 7, -15.5, 0.431713, 7, -17, 0.431713, 5, -17.5, 0.431713, 7.5, -17, 0.431713, 4, -18.25, 0.431713, 11, -18, 0.431713, 15.75, -18, 0.431713, 12.25, -25.25, 0.431713, 15.5, -16, 0.431713, 3.25, -34.5, 0.431713, 17.75, -25.75, 0.431713, 18, -10, 10.4317, -1.25, -7.75, 10.4317, -0.5, -9, 10.4317, -2.5, -10.25, 10.4317, -1.75, -11, 0.431713, 3.75, -7.25, 0.431713, 0.5, -10.75, 0.431713, 5, -8.5, 0.431713, 8.5, -4.5, 0.431713, 7.5, 3.5, 0.431713, 2, 4.25, 0.431713, 4.25, -8.75, 15.4317, 0.75, -8.75, 15.4317, 0.25, -10.75, 15.4317, -0.5, -12, 15.4317, 2.25, -9.75, 15.4317, 3.25, -10.5, 10.4317, 1.25, -9.5, 10.4317, 0.75, -9.5, 10.4317, 0.25, -10.75, 10.4317, 0, 4.75, 5.43171, 2.5, 6, 5.43171, 5.25, 8, 5.43171, 4.5, 6.75, 5.43171, 1.5, -11.25, 10.4317, 2.25, -10.25, 10.4317, 2.75, -10.25, 10.4317, 2, 5.25, 0.431713, 2.5, 6.25, 0.431713, 5, 7.5, 0.431713, 4.5, 6.5, 0.431713, 2, -15.75, 5.43171, 4.5, -14.75, 5.43171, 6.5, -13.5, 5.43171, 5.75, -13.5, 5.43171, 3, -12.75, 0.431713, 3.75, -13.5, 0.431713, 3.25, -13.5, 0.431713, 4.5, -12.5, 0.431713, 4.75, -14.25, 0.431713, 6, -15, 0.431713, 5, -12.5, 10.4317, 5.5, -10.25, 10.4317, 5.5, -10.25, 10.4317, 4.25, -12.5, 10.4317, 3.5, 6, 0.431713, 8.25, 5.25, 0.431713, 6.25, 5.25, 0.431713, 10, 4.75, 0.431713, 12.25, 5.25, 0.431713, 11.5, 1, 0.431713, 12.5, -3.25, 0.431713, 9.75, -3.25, 0.431713, 11.25, -4, 0.431713, 11.75, 0.75, 0.431713, 13, -11.75, 0.431713, 16, -11.25, 0.431713, 15.25, -11.75, 0.431713, 15, -13.5, 0.431713, 16, -14, 0.431713, 7.25, -14, 0.431713, 7.75, -13.25, 0.431713, 8, -16.25, 0.431713, 15.75, -14.25, 0.431713, 13, -11, 0.431713, 10.25, -9, 0.431713, 10.25, -9, 0.431713, 8.75, -13.25, 0.431713, 9.75, -11.75, 0.431713, 13.25, -16, 0.431713, 17.25, -18.25, 0.431713, 17.5, -18.5, 0.431713, 19.75, -14, 0.431713, 20.25, -14.25, 5.43171, 9.25, -14.5, 5.43171, 8.5, -16.5, 5.43171, 8.25, -17, 5.43171, 10.25, -17, 5.43171, 11.5, -15, 5.43171, 11.75, -16.75, 0.431713, 10.5, -16.75, 0.431713, 11.25, -15.25, 0.431713, 11.5, -14.75, 0.431713, 10.25, -14.75, 0.431713, 8.75, -16.25, 0.431713, 8.5, -7.5, 5.43171, 9.25, -8, 5.43171, 9.5, -7.75, 5.43171, 11.25, -10, 5.43171, 11.25, -10.75, 5.43171, 13.75, -10.5, 5.43171, 14.5, -8.5, 5.43171, 14.75, -7.75, 5.43171, 11.75, -4.25, 5.43171, 10.75, -5, 5.43171, 8.5, 9.25, 5.43171, 12.25, 9.75, 5.43171, 12.25, 9.5, 5.43171, 11.25, 10, 5.43171, 10.5, 9.75, 5.43171, 9.75, 7, 5.43171, 8.75, 6.25, 5.43171, 10.5, -7, 0.431713, 11, -4.75, 0.431713, 10.5, -5, 0.431713, 9, -7.5, 0.431713, 9.75, 8.5, 0.431713, 11.5, 9.25, 0.431713, 11.5, 9.5, 0.431713, 11, 7.75, 0.431713, 9.25, 7.25, 0.431713, 9.25, 6.75, 0.431713, 10.25, 6.75, 0.431713, 10.75, 9.5, 0.431713, 10, 10.5, 5.43171, 12.25, 11.75, 5.43171, 15, 13.75, 5.43171, 13.75, 11.75, 5.43171, 11.25, -8.25, 0.431713, 12.5, -8.5, 0.431713, 11.75, -9.75, 0.431713, 11.5, -10.25, 0.431713, 13, -10.25, 0.431713, 14.25, -8.75, 0.431713, 14.5, 5.25, 0.431713, 16.5, 5.75, 0.431713, 17.25, 7, 0.431713, 18.5, 8.75, 0.431713, 13, 10.5, 0.431713, 18.5, 10.75, 0.431713, 15, 2, 0.431713, 18.25, 2.75, 0.431713, 17.75, 1, 0.431713, 17.5, 2, 0.431713, 19.5, -8, 0.431713, 16, -7, 0.431713, 12.75, -7.5, 0.431713, 15.5, 4.75, 0.431713, 34.5, 4.75, 0.431713, 22.5, -13.25, 0.431713, 29.25, -13, 0.431713, 34.5, 12, 0.431713, 14.5, 13.25, 0.431713, 13.75, 11.75, 0.431713, 11.75, 10.5, 0.431713, 12.5, 2, 5.43171, 16.75, 4.25, 5.43171, 16.5, 4, 5.43171, 13.5, 1.75, 5.43171, 13.5, 13.75, 0.431713, 15, 15.25, 0.431713, 15.75, 34.5, 0.431713, 18.5, 15, 0.431713, 18.25, 2.25, 0.431713, 16.5, 4, 0.431713, 16.25, 3.75, 0.431713, 13.75, 2, 0.431713, 13.75, 11.5, 5.43171, 18, 11.5, 5.43171, 19.25, 13.5, 5.43171, 19.5, 14.25, 5.43171, 16.5, 12, 5.43171, 15.75, 11.75, 0.431713, 18.25, 11.75, 0.431713, 19, 13.25, 0.431713, 19.25, 13.75, 0.431713, 17.75, 13.75, 0.431713, 16.5, 12.25, 0.431713, 16.25, -16.75, 0.431713, 23.5, -16.75, 0.431713, 25.5, -14.75, 0.431713, 25.5, -14.5, 0.431713, 22, -21.5, 0.431713, 19.5, -23.75, 0.431713, 17.25, -24, 0.431713, 23, -21.75, 0.431713, 21.25, 5, 5.43171, 21, 5, 5.43171, 21.5, 5.75, 5.43171, 20.75, 4.75, 5.43171, 17.5, 3.25, 5.43171, 18.75, 3.25, 5.43171, 19.5, 6.5, 5.43171, 19.5, 7, 5.43171, 20.5, 10.25, 5.43171, 19.5, 7.25, 5.43171, 21.75, 10.5, 5.43171, 21.75, -26, 0.431713, 24.25, -34.5, 0.431713, 24.25, 5, 0.431713, 20.75, 6.25, 0.431713, 20.25, 6.25, 0.431713, 19.5, 4.75, 0.431713, 18, 3.5, 0.431713, 19, 14.25, 0.431713, 20.5, 11.5, 0.431713, 20.25, 11.5, 0.431713, 22.75, 10.75, 0.431713, 23, 10.75, 0.431713, 34.5, 34.5, 0.431713, 34.5, 8, 0.431713, 20.5, 7.5, 0.431713, 20.75, 7.5, 0.431713, 21.5, 10.25, 0.431713, 21.5, 10, 0.431713, 19.75, 8, 0.431713, 19.75, 6.5, 0.431713, 22.75, 6.25, 0.431713, 22, -25.5, 0.431713, 27.75, -25.5, 0.431713, 24.75, -25.5, 0.431713, 29.25, -22.5, 0.431713, 34.5, -22.25, 0.431713, 29.75, -34.5, 0.431713, 34.5, -16.75, 0.431713, 28.5, -16.5, 0.431713, 29.25, -15, 0.431713, 29, -23.75, 0.431713, 27.5, -18, 0.431713, 28.25, -16.75, 0.431713, 30.25, -14.25, 0.431713, 29.75, -13.5, 0.431713, 29.75)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(3, 5, 2), PackedInt32Array(8, 7, 6), PackedInt32Array(9, 8, 6), PackedInt32Array(12, 11, 10), PackedInt32Array(10, 13, 9), PackedInt32Array(9, 6, 10), PackedInt32Array(10, 6, 5), PackedInt32Array(10, 5, 3), PackedInt32Array(10, 3, 12), PackedInt32Array(16, 15, 14), PackedInt32Array(19, 18, 17), PackedInt32Array(14, 11, 12), PackedInt32Array(16, 14, 17), PackedInt32Array(17, 14, 12), PackedInt32Array(17, 12, 19), PackedInt32Array(21, 20, 22), PackedInt32Array(22, 20, 23), PackedInt32Array(23, 20, 24), PackedInt32Array(27, 26, 25), PackedInt32Array(30, 29, 31), PackedInt32Array(31, 29, 28), PackedInt32Array(31, 28, 19), PackedInt32Array(32, 23, 24), PackedInt32Array(28, 18, 19), PackedInt32Array(24, 25, 32), PackedInt32Array(26, 32, 25), PackedInt32Array(33, 27, 29), PackedInt32Array(29, 27, 25), PackedInt32Array(29, 25, 28), PackedInt32Array(31, 34, 30), PackedInt32Array(29, 36, 35), PackedInt32Array(30, 36, 29), PackedInt32Array(38, 37, 39), PackedInt32Array(39, 37, 40), PackedInt32Array(42, 41, 40), PackedInt32Array(43, 34, 31), PackedInt32Array(37, 43, 40), PackedInt32Array(40, 43, 31), PackedInt32Array(40, 31, 42), PackedInt32Array(42, 31, 44), PackedInt32Array(47, 46, 45), PackedInt32Array(48, 47, 49), PackedInt32Array(47, 45, 49), PackedInt32Array(49, 45, 50), PackedInt32Array(50, 51, 49), PackedInt32Array(49, 51, 53), PackedInt32Array(49, 53, 52), PackedInt32Array(56, 55, 54), PackedInt32Array(54, 58, 57), PackedInt32Array(57, 60, 59), PackedInt32Array(54, 57, 56), PackedInt32Array(56, 57, 59), PackedInt32Array(56, 59, 61), PackedInt32Array(61, 59, 62), PackedInt32Array(64, 63, 65), PackedInt32Array(65, 63, 66), PackedInt32Array(16, 67, 15), PackedInt32Array(15, 67, 68), PackedInt32Array(67, 65, 68), PackedInt32Array(68, 65, 66), PackedInt32Array(69, 71, 70), PackedInt32Array(1, 72, 0), PackedInt32Array(0, 72, 71), PackedInt32Array(0, 71, 69), PackedInt32Array(74, 73, 75), PackedInt32Array(71, 72, 73), PackedInt32Array(73, 72, 75), PackedInt32Array(80, 79, 81), PackedInt32Array(81, 79, 76), PackedInt32Array(76, 79, 77), PackedInt32Array(77, 79, 78), PackedInt32Array(84, 83, 82), PackedInt32Array(87, 86, 85), PackedInt32Array(89, 88, 90), PackedInt32Array(90, 88, 92), PackedInt32Array(90, 92, 91), PackedInt32Array(87, 85, 93), PackedInt32Array(62, 94, 61), PackedInt32Array(61, 94, 95), PackedInt32Array(87, 93, 96), PackedInt32Array(96, 93, 51), PackedInt32Array(51, 93, 95), PackedInt32Array(51, 95, 94), PackedInt32Array(88, 97, 92), PackedInt32Array(92, 97, 96), PackedInt32Array(96, 97, 87), PackedInt32Array(82, 95, 84), PackedInt32Array(84, 95, 98), PackedInt32Array(98, 95, 93), PackedInt32Array(94, 53, 51), PackedInt32Array(97, 99, 87), PackedInt32Array(38, 39, 100), PackedInt32Array(100, 39, 101), PackedInt32Array(102, 100, 103), PackedInt32Array(103, 100, 104), PackedInt32Array(104, 100, 105), PackedInt32Array(105, 100, 101), PackedInt32Array(6, 7, 106), PackedInt32Array(108, 107, 109), PackedInt32Array(109, 107, 110), PackedInt32Array(106, 111, 6), PackedInt32Array(6, 111, 112), PackedInt32Array(63, 64, 113), PackedInt32Array(113, 64, 114), PackedInt32Array(114, 64, 115), PackedInt32Array(110, 107, 112), PackedInt32Array(112, 107, 6), PackedInt32Array(116, 109, 110), PackedInt32Array(118, 113, 117), PackedInt32Array(117, 113, 114), PackedInt32Array(117, 116, 118), PackedInt32Array(118, 116, 110), PackedInt32Array(111, 120, 112), PackedInt32Array(112, 120, 119), PackedInt32Array(112, 119, 121), PackedInt32Array(124, 123, 122), PackedInt32Array(124, 122, 125), PackedInt32Array(125, 122, 41), PackedInt32Array(125, 41, 126), PackedInt32Array(126, 41, 42), PackedInt32Array(27, 33, 127), PackedInt32Array(127, 33, 128), PackedInt32Array(128, 33, 129), PackedInt32Array(129, 33, 130), PackedInt32Array(131, 127, 132), PackedInt32Array(132, 127, 128), PackedInt32Array(132, 133, 131), PackedInt32Array(131, 133, 134), PackedInt32Array(134, 133, 135), PackedInt32Array(133, 136, 135), PackedInt32Array(135, 136, 137), PackedInt32Array(139, 138, 140), PackedInt32Array(140, 138, 141), PackedInt32Array(138, 143, 123), PackedInt32Array(123, 143, 142), PackedInt32Array(142, 143, 130), PackedInt32Array(130, 143, 129), PackedInt32Array(138, 123, 141), PackedInt32Array(144, 122, 123), PackedInt32Array(142, 144, 123), PackedInt32Array(143, 145, 129), PackedInt32Array(147, 146, 148), PackedInt32Array(148, 146, 149), PackedInt32Array(149, 146, 69), PackedInt32Array(69, 146, 151), PackedInt32Array(69, 151, 150), PackedInt32Array(69, 70, 149), PackedInt32Array(152, 107, 108), PackedInt32Array(147, 148, 153), PackedInt32Array(153, 148, 154), PackedInt32Array(154, 148, 155), PackedInt32Array(158, 157, 156), PackedInt32Array(108, 158, 152), PackedInt32Array(152, 158, 156), PackedInt32Array(152, 156, 159), PackedInt32Array(153, 154, 160), PackedInt32Array(162, 161, 160), PackedInt32Array(160, 161, 153), PackedInt32Array(163, 152, 159), PackedInt32Array(155, 163, 164), PackedInt32Array(164, 163, 159), PackedInt32Array(155, 164, 154), PackedInt32Array(166, 165, 167), PackedInt32Array(167, 165, 168), PackedInt32Array(168, 165, 169), PackedInt32Array(169, 165, 170), PackedInt32Array(156, 157, 171), PackedInt32Array(171, 157, 172), PackedInt32Array(172, 157, 173), PackedInt32Array(176, 175, 174), PackedInt32Array(174, 171, 172), PackedInt32Array(178, 177, 172), PackedInt32Array(172, 177, 174), PackedInt32Array(174, 177, 176), PackedInt32Array(180, 179, 181), PackedInt32Array(181, 179, 182), PackedInt32Array(182, 179, 183), PackedInt32Array(183, 179, 184), PackedInt32Array(186, 185, 187), PackedInt32Array(187, 185, 188), PackedInt32Array(188, 185, 189), PackedInt32Array(189, 185, 190), PackedInt32Array(177, 178, 192), PackedInt32Array(192, 178, 191), PackedInt32Array(193, 192, 194), PackedInt32Array(194, 192, 137), PackedInt32Array(194, 137, 195), PackedInt32Array(195, 137, 136), PackedInt32Array(197, 196, 198), PackedInt32Array(198, 196, 193), PackedInt32Array(195, 200, 194), PackedInt32Array(194, 200, 199), PackedInt32Array(193, 196, 192), PackedInt32Array(192, 191, 137), PackedInt32Array(202, 201, 203), PackedInt32Array(203, 201, 207), PackedInt32Array(207, 201, 208), PackedInt32Array(208, 201, 206), PackedInt32Array(208, 206, 204), PackedInt32Array(204, 206, 205), PackedInt32Array(211, 210, 209), PackedInt32Array(212, 125, 209), PackedInt32Array(209, 125, 126), PackedInt32Array(209, 126, 211), PackedInt32Array(205, 212, 204), PackedInt32Array(204, 212, 209), PackedInt32Array(176, 213, 175), PackedInt32Array(175, 213, 214), PackedInt32Array(216, 215, 217), PackedInt32Array(217, 215, 218), PackedInt32Array(218, 215, 213), PackedInt32Array(213, 215, 214), PackedInt32Array(219, 217, 220), PackedInt32Array(220, 217, 221), PackedInt32Array(221, 217, 218), PackedInt32Array(222, 219, 223), PackedInt32Array(223, 219, 220), PackedInt32Array(225, 161, 224), PackedInt32Array(224, 161, 162), PackedInt32Array(228, 227, 226), PackedInt32Array(230, 225, 231), PackedInt32Array(231, 225, 224), PackedInt32Array(231, 224, 229), PackedInt32Array(231, 229, 232), PackedInt32Array(234, 233, 229), PackedInt32Array(229, 233, 232), PackedInt32Array(231, 228, 230), PackedInt32Array(230, 228, 151), PackedInt32Array(151, 228, 150), PackedInt32Array(150, 228, 226), PackedInt32Array(236, 145, 235), PackedInt32Array(235, 145, 143), PackedInt32Array(199, 200, 237), PackedInt32Array(237, 200, 239), PackedInt32Array(237, 239, 235), PackedInt32Array(237, 235, 238), PackedInt32Array(239, 236, 235), PackedInt32Array(140, 240, 139), PackedInt32Array(139, 240, 241), PackedInt32Array(243, 242, 244), PackedInt32Array(244, 242, 245), PackedInt32Array(245, 242, 211), PackedInt32Array(245, 211, 246), PackedInt32Array(248, 247, 249), PackedInt32Array(249, 247, 250), PackedInt32Array(240, 243, 241), PackedInt32Array(241, 243, 251), PackedInt32Array(251, 243, 244), PackedInt32Array(242, 210, 211), PackedInt32Array(253, 252, 251), PackedInt32Array(251, 252, 241), PackedInt32Array(247, 244, 250), PackedInt32Array(250, 244, 245), PackedInt32Array(257, 256, 254), PackedInt32Array(254, 256, 255), PackedInt32Array(259, 258, 260), PackedInt32Array(260, 258, 261), PackedInt32Array(261, 258, 262), PackedInt32Array(262, 258, 263), PackedInt32Array(252, 253, 264), PackedInt32Array(253, 265, 264), PackedInt32Array(264, 265, 238), PackedInt32Array(238, 265, 266), PackedInt32Array(266, 265, 267), PackedInt32Array(266, 237, 238), PackedInt32Array(271, 270, 268), PackedInt32Array(268, 270, 269), PackedInt32Array(273, 272, 274), PackedInt32Array(274, 272, 275), PackedInt32Array(197, 198, 276), PackedInt32Array(276, 198, 277), PackedInt32Array(280, 277, 278), PackedInt32Array(278, 277, 279), PackedInt32Array(223, 281, 222), PackedInt32Array(222, 281, 277), PackedInt32Array(222, 277, 280), PackedInt32Array(222, 280, 282), PackedInt32Array(281, 276, 277), PackedInt32Array(285, 284, 283), PackedInt32Array(285, 283, 286), PackedInt32Array(285, 286, 287), PackedInt32Array(287, 286, 288), PackedInt32Array(290, 289, 288), PackedInt32Array(288, 289, 291), PackedInt32Array(292, 287, 216), PackedInt32Array(216, 287, 215), PackedInt32Array(215, 287, 227), PackedInt32Array(291, 294, 293), PackedInt32Array(288, 291, 287), PackedInt32Array(287, 291, 227), PackedInt32Array(227, 291, 226), PackedInt32Array(226, 291, 293), PackedInt32Array(298, 297, 295), PackedInt32Array(295, 297, 296), PackedInt32Array(299, 278, 279), PackedInt32Array(279, 300, 299), PackedInt32Array(299, 300, 301), PackedInt32Array(301, 300, 302), PackedInt32Array(302, 300, 303), PackedInt32Array(304, 267, 265), PackedInt32Array(300, 267, 303), PackedInt32Array(303, 267, 304), PackedInt32Array(303, 304, 305), PackedInt32Array(307, 306, 308), PackedInt32Array(308, 306, 310), PackedInt32Array(308, 310, 309), PackedInt32Array(312, 311, 313), PackedInt32Array(313, 311, 314), PackedInt32Array(316, 315, 317), PackedInt32Array(317, 315, 318), PackedInt32Array(321, 320, 319), PackedInt32Array(325, 324, 322), PackedInt32Array(322, 324, 323), PackedInt32Array(327, 326, 328), PackedInt32Array(328, 326, 329), PackedInt32Array(333, 332, 330), PackedInt32Array(330, 332, 331), PackedInt32Array(335, 332, 334), PackedInt32Array(334, 332, 333), PackedInt32Array(337, 336, 338), PackedInt32Array(338, 336, 339), PackedInt32Array(248, 249, 340), PackedInt32Array(248, 340, 341), PackedInt32Array(341, 340, 342), PackedInt32Array(344, 343, 342), PackedInt32Array(342, 343, 345), PackedInt32Array(341, 342, 305), PackedInt32Array(305, 342, 345), PackedInt32Array(305, 345, 346), PackedInt32Array(305, 346, 303), PackedInt32Array(349, 348, 347), PackedInt32Array(349, 347, 345), PackedInt32Array(345, 347, 346), PackedInt32Array(351, 350, 352), PackedInt32Array(352, 350, 353), PackedInt32Array(355, 354, 356), PackedInt32Array(356, 354, 301), PackedInt32Array(289, 290, 357), PackedInt32Array(357, 290, 358), PackedInt32Array(360, 359, 361), PackedInt32Array(361, 359, 362), PackedInt32Array(361, 362, 356), PackedInt32Array(361, 356, 301), PackedInt32Array(352, 353, 363), PackedInt32Array(363, 353, 358), PackedInt32Array(358, 353, 357), PackedInt32Array(357, 353, 364), PackedInt32Array(366, 365, 364), PackedInt32Array(353, 367, 364), PackedInt32Array(364, 367, 366), PackedInt32Array(359, 363, 362), PackedInt32Array(362, 363, 358), PackedInt32Array(301, 302, 361), PackedInt32Array(369, 368, 370), PackedInt32Array(370, 368, 371), PackedInt32Array(371, 368, 372), PackedInt32Array(372, 368, 373), PackedInt32Array(375, 374, 376), PackedInt32Array(376, 374, 377), PackedInt32Array(377, 374, 378), PackedInt32Array(378, 374, 379), PackedInt32Array(380, 382, 381), PackedInt32Array(382, 387, 383), PackedInt32Array(383, 387, 384), PackedInt32Array(384, 387, 385), PackedInt32Array(385, 387, 386), PackedInt32Array(382, 380, 387), PackedInt32Array(387, 380, 389), PackedInt32Array(387, 389, 388), PackedInt32Array(392, 391, 390), PackedInt32Array(394, 393, 392), PackedInt32Array(392, 390, 394), PackedInt32Array(394, 390, 396), PackedInt32Array(394, 396, 395), PackedInt32Array(397, 400, 398), PackedInt32Array(398, 400, 399), PackedInt32Array(403, 402, 401), PackedInt32Array(406, 405, 404), PackedInt32Array(406, 404, 407), PackedInt32Array(407, 404, 401), PackedInt32Array(401, 404, 403), PackedInt32Array(403, 404, 408), PackedInt32Array(410, 391, 409), PackedInt32Array(409, 412, 410), PackedInt32Array(410, 412, 411), PackedInt32Array(414, 413, 415), PackedInt32Array(415, 413, 416), PackedInt32Array(416, 413, 417), PackedInt32Array(417, 413, 418), PackedInt32Array(421, 420, 419), PackedInt32Array(343, 344, 422), PackedInt32Array(421, 419, 423), PackedInt32Array(423, 419, 424), PackedInt32Array(424, 419, 422), PackedInt32Array(422, 419, 343), PackedInt32Array(427, 426, 425), PackedInt32Array(425, 428, 427), PackedInt32Array(427, 428, 429), PackedInt32Array(429, 428, 350), PackedInt32Array(429, 350, 351), PackedInt32Array(430, 348, 431), PackedInt32Array(431, 348, 349), PackedInt32Array(431, 349, 427), PackedInt32Array(429, 431, 427), PackedInt32Array(433, 432, 428), PackedInt32Array(428, 432, 435), PackedInt32Array(428, 435, 434), PackedInt32Array(428, 434, 350), PackedInt32Array(439, 438, 436), PackedInt32Array(436, 438, 437), PackedInt32Array(441, 440, 442), PackedInt32Array(442, 440, 443), PackedInt32Array(444, 245, 445), PackedInt32Array(445, 245, 246), PackedInt32Array(447, 445, 446), PackedInt32Array(446, 445, 246), PackedInt32Array(449, 448, 450), PackedInt32Array(450, 448, 451), PackedInt32Array(453, 452, 454), PackedInt32Array(454, 452, 455), PackedInt32Array(455, 452, 456), PackedInt32Array(458, 457, 459), PackedInt32Array(459, 457, 460), PackedInt32Array(460, 457, 461), PackedInt32Array(461, 457, 462), PackedInt32Array(464, 463, 465), PackedInt32Array(465, 463, 466), PackedInt32Array(470, 469, 467), PackedInt32Array(467, 469, 468), PackedInt32Array(366, 467, 365), PackedInt32Array(365, 467, 468), PackedInt32Array(466, 463, 470), PackedInt32Array(470, 463, 469), PackedInt32Array(473, 472, 471), PackedInt32Array(473, 471, 477), PackedInt32Array(477, 471, 476), PackedInt32Array(477, 476, 475), PackedInt32Array(477, 475, 474), PackedInt32Array(473, 477, 478), PackedInt32Array(478, 477, 479), PackedInt32Array(480, 478, 481), PackedInt32Array(481, 478, 479), PackedInt32Array(482, 483, 294), PackedInt32Array(294, 483, 293), PackedInt32Array(485, 484, 486), PackedInt32Array(486, 484, 487), PackedInt32Array(487, 484, 488), PackedInt32Array(491, 490, 489), PackedInt32Array(493, 492, 491), PackedInt32Array(493, 491, 489), PackedInt32Array(489, 447, 493), PackedInt32Array(493, 447, 446), PackedInt32Array(493, 446, 494), PackedInt32Array(496, 495, 497), PackedInt32Array(497, 495, 499), PackedInt32Array(497, 499, 498), PackedInt32Array(495, 500, 499), PackedInt32Array(502, 501, 433), PackedInt32Array(433, 501, 432), PackedInt32Array(492, 493, 501), PackedInt32Array(501, 493, 432), PackedInt32Array(482, 504, 503), PackedInt32Array(503, 505, 482), PackedInt32Array(482, 505, 483), PackedInt32Array(505, 507, 506), PackedInt32Array(506, 508, 505), PackedInt32Array(505, 508, 483), PackedInt32Array(510, 509, 511), PackedInt32Array(511, 509, 464), PackedInt32Array(511, 464, 465), PackedInt32Array(512, 503, 504), PackedInt32Array(464, 509, 513), PackedInt32Array(513, 512, 464), PackedInt32Array(464, 512, 504), PackedInt32Array(510, 511, 514), PackedInt32Array(514, 511, 515), PackedInt32Array(507, 514, 506), PackedInt32Array(506, 514, 435), PackedInt32Array(515, 516, 514), PackedInt32Array(514, 516, 435), PackedInt32Array(516, 434, 435)]
+geometry_collision_mask = 4294901768
+agent_height = 1.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f3qel"]
 albedo_texture = ExtResource("2_fss3v")
@@ -41,27 +28,979 @@ size = Vector3(3, 5, 4)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ho7i2"]
 points = PackedVector3Array(1.5, 2.5, 2, -1.5, 2.5, 2, 1.5, -2.5, 2, 1.5, 2.5, -2, -1.5, 2.5, -2, -1.5, -2.5, 2, 1.5, -2.5, -2, -1.5, -2.5, -2)
 
-[sub_resource type="BoxMesh" id="BoxMesh_x1g7b"]
-size = Vector3(3, 1, 1)
+[sub_resource type="BoxMesh" id="BoxMesh_ka3j2"]
+size = Vector3(0.5, 5, 8)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7i54u"]
-points = PackedVector3Array(1.5, 0.5, 0.5, 1.5, 0.5, -0.5, -1.5, 0.5, 0.5, 1.5, -0.5, 0.5, 1.5, -0.5, -0.5, -1.5, 0.5, -0.5, -1.5, -0.5, 0.5, -1.5, -0.5, -0.5)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x54mn"]
+points = PackedVector3Array(-0.25, -2.5, -4, 0.25, -2.5, -4, -0.25, -2.5, 4, -0.25, 2.5, -4, 0.25, 2.5, -4, 0.25, -2.5, 4, -0.25, 2.5, 4, 0.25, 2.5, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h0el3"]
+size = Vector3(3, 1, 15)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qa3yw"]
+points = PackedVector3Array(1.5, 0.5, 7.5, 1.5, -0.5, 7.5, 1.5, 0.5, -7.5, -1.5, 0.5, 7.5, -1.5, -0.5, 7.5, 1.5, -0.5, -7.5, -1.5, 0.5, -7.5, -1.5, -0.5, -7.5)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bborq"]
+size = Vector2(70, 70)
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_p4n20"]
+panorama = ExtResource("1_y57w1")
+
+[sub_resource type="Sky" id="Sky_r6cqj"]
+sky_material = SubResource("PanoramaSkyMaterial_p4n20")
+
+[sub_resource type="Environment" id="Environment_k7lfh"]
+background_mode = 2
+sky = SubResource("Sky_r6cqj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cwgjc"]
+albedo_texture = ExtResource("2_fss3v")
+uv1_scale = Vector3(3, 3, 3)
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_wt2xg"]
+material = SubResource("StandardMaterial3D_cwgjc")
+size = Vector2(125, 125)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0lhur"]
+size = Vector3(125, 0.125, 125)
 
 [node name="Node3D" type="Node3D"]
 
+[node name="DoorDebug" parent="." instance=ExtResource("8_sxrfj")]
+transform = Transform3D(0.708241, 0, 0.70597, 0, 0.999999, 0, -0.70597, 0, 0.708241, 4.15417, 0.000243146, 12.695)
+
+[node name="DoorDebug3" parent="." instance=ExtResource("8_sxrfj")]
+transform = Transform3D(-0.0464961, 0, 0.998918, 0, 0.999999, 0, -0.998918, 0, -0.0464961, -13.7087, 0.000243146, -16.953)
+
+[node name="DoorDebug6" parent="." instance=ExtResource("8_sxrfj")]
+transform = Transform3D(-0.804987, 0, 0.593292, 0, 0.999999, 0, -0.593292, 0, -0.804987, 13.8046, 0.000243384, -22.4364)
+
+[node name="DoorDebug4" parent="." instance=ExtResource("8_sxrfj")]
+transform = Transform3D(-0.0464961, 0, 0.998918, 0, 0.999999, 0, -0.998918, 0, -0.0464961, -18.2007, 0.000243146, -12.3353)
+
+[node name="DoorDebug5" parent="." instance=ExtResource("8_sxrfj")]
+transform = Transform3D(0.998918, 0, 0.0464961, 0, 0.999999, 0, -0.0464961, 0, 0.998918, -22.45, 0.000243146, -14.8777)
+
+[node name="DoorDebug2" parent="." instance=ExtResource("8_sxrfj")]
+transform = Transform3D(-0.708241, 0, -0.705971, 0, 0.999999, 0, 0.705971, 0, -0.708241, 5.79763, 0.000243146, 11.0568)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_i8ktj")
+
+[node name="Obstacle" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.74774, 0, -0.663992, 0, 1, 0, 0.663992, 0, 0.74774, -7.47789, 2.53287, -2.57196)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle2" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.887759, 0, 0.460308, 0, 1, 0, -0.460308, 0, 0.887759, 6.41128, 2.50024, 3.49622)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle2"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle2"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle30" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.400285, 0, 0.91639, 0, 1, 0, -0.91639, 0, 0.400285, 8.18636, 2.50024, 10.4285)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle30"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle30"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle33" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.752966, 0, 0.658059, 0, 1, 0, -0.658059, 0, 0.752966, 11.8545, 2.50024, 13.151)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle33"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle33"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle34" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.752966, 0, 0.658059, 0, 1, 0, -0.658059, 0, 0.752966, 4.95665, 2.50024, 19.477)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle34"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle34"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle35" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.0348124, 0, -0.999394, 0, 1, 0, 0.999394, 0, -0.0348124, 8.89573, 2.50024, 20.6993)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle35"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle35"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle36" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.983644, 0, -0.180124, 0, 1, 0, 0.180124, 0, 0.983644, 12.791, 2.50024, 17.7455)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle36"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle36"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle31" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.996387, 0, 0.0849298, 0, 1, 0, -0.0849298, 0, 0.996387, 3.06572, 2.50024, 15.0664)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle31"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle31"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle3" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 6.30042, 2.50024, -6.09079)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle3"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle3"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle32" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, -6.13455, 2.50024, 10.1059)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle32"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle32"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle37" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.978617, 0, -0.205692, 0, 1, 0, 0.205692, 0, 0.978617, -9.31743, 2.50024, 12.9851)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle37"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle37"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.0547064, 0, 0.998503, 0, 1, 0, -0.998503, 0, 0.0547064, -20.6459, 2.50024, 16.5285)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.998503, 0, -0.0547064, 0, 1, 0, 0.0547064, 0, 0.998503, -24.8658, 2.50024, 20.2419)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D2"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D2"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.130423, 0, -0.991459, 0, 1, 0, 0.991459, 0, -0.130423, -21.0186, 2.50024, 28.9029)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D3"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D3"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.108832, 0, 0.99406, 0, 1, 0, -0.99406, 0, 0.108832, -17.1221, 2.50024, 20.9248)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D4"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D4"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D5" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.99406, 0, -0.108832, 0, 1, 0, 0.108832, 0, 0.99406, -13.045, 2.50024, 20.3535)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D5"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D5"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D8" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.134488, 0, -0.990915, 0, 1, 0, 0.990915, 0, 0.134488, -16.2233, 2.50024, -15.7095)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D8"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D8"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D9" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.134488, 0, -0.990915, 0, 1, 0, 0.990915, 0, 0.134488, -21.3246, 2.50024, -11.3136)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D9"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D9"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D10" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.990915, 0, -0.134488, 0, 1, 0, 0.134488, 0, -0.990915, -25.5417, 2.50024, -10.7752)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D10"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D10"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D16" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.990915, 0, -0.134488, 0, 1, 0, 0.134488, 0, -0.990915, -29.6609, 2.50024, -10.2161)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D16"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D16"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D17" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.146049, 0, 0.989277, 0, 1, 0, -0.989277, 0, -0.146049, -27.1619, 2.50024, -17.4253)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D17"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D17"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D18" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.146049, 0, 0.989277, 0, 1, 0, -0.989277, 0, -0.146049, -17.2373, 2.50024, -18.4789)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D18"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D18"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D19" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.763627, 0, 0.645657, 0, 1, 0, -0.645657, 0, -0.763627, -7.16485, 2.50024, -18.5867)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D19"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D19"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D20" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.660185, 0, -0.751103, 0, 1, 0, 0.751103, 0, -0.660185, -9.78918, 2.50024, -21.4431)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D20"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D20"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D21" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.660185, 0, -0.751103, 0, 1, 0, 0.751103, 0, -0.660185, -16.3359, 2.50024, -21.6422)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D21"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D21"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D22" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.660185, 0, -0.751103, 0, 1, 0, 0.751103, 0, -0.660185, -26.7681, 2.50024, -24.7195)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D22"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D22"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D23" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.751103, 0, 0.660185, 0, 1, 0, -0.660185, 0, -0.751103, -18.2437, 2.50024, -25.8809)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D23"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D23"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D24" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.751103, 0, 0.660185, 0, 1, 0, -0.660185, 0, -0.751103, -9.90559, 2.50024, -27.0062)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D24"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D24"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D25" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.660185, 0, 0.751103, 0, 1, 0, -0.751103, 0, 0.660185, -5.10392, 2.50024, -22.2509)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D25"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D25"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D30" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.660185, 0, 0.751103, 0, 1, 0, -0.751103, 0, 0.660185, 6.18539, 2.50024, -19.2415)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D30"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D30"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D31" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.751103, 0, 0.660185, 0, 1, 0, -0.660185, 0, -0.751103, 11.5539, 2.50024, -19.4951)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D31"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D31"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D32" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.751103, 0, 0.660185, 0, 1, 0, -0.660185, 0, -0.751103, 5.45238, 2.50024, -24.6824)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D32"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D32"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D33" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.660185, 0, 0.751103, 0, 1, 0, -0.751103, 0, 0.660185, 9.37976, 2.50024, -26.2382)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D33"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D33"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D34" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.660185, 0, 0.751103, 0, 1, 0, -0.751103, 0, 0.660185, 10.9885, 5.08493, -24.8242)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D34"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D34"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D26" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -17.9192, 4.99259, -20.2851)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D26"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D26"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D37" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -11.909, 4.99259, -15.0051)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D37"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D37"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D42" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -15.2091, 4.99259, -11.2488)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D42"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D42"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D43" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -18.5091, 4.99259, -7.49247)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D43"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D43"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D44" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -24.5192, 4.99259, -12.7725)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D44"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D44"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D38" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -8.60903, 4.99259, -18.7614)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D38"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D38"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D39" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -14.6191, 4.99259, -24.0414)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D39"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D39"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D40" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -11.3191, 4.99259, -27.7978)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D40"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D40"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D41" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -5.30902, 4.99259, -22.5178)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D41"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D41"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D27" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -21.2192, 4.99259, -16.5288)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D27"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D27"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D35" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, 7.37086, 4.99259, -21.0214)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D35"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D35"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D36" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 1.33451e-15, 3.28388e-08, 0.751264, 0.660002, 9.48933, 4.99259, -23.4328)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D36"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D36"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D28" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -23.9293, 4.99259, -25.5651)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D28"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D28"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D29" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-2.88496e-08, -0.660002, 0.751264, 1, -4.37114e-08, 0, 3.28388e-08, 0.751264, 0.660002, -27.2293, 4.99259, -21.8088)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D29"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D29"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D11" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.990915, 0, -0.134488, 0, 1, 0, 0.134488, 0, -0.990915, -23.3298, 2.50024, -18.3288)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D11"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D11"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D12" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.990915, 0, -0.134488, 0, 1, 0, 0.134488, 0, -0.990915, -21.8689, 2.50024, -7.36396)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D12"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D12"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D15" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.851388, 0, -0.524536, 0, 1, 0, 0.524536, 0, -0.851388, -16.4599, 2.50024, 0.831304)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D15"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D15"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D13" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.134488, 0, 0.990915, 0, 1, 0, -0.990915, 0, -0.134488, -25.1099, 2.50024, -2.95629)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D13"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D13"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D14" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.188341, 0, 0.982104, 0, 1, 0, -0.982104, 0, 0.188341, -15.508, 2.50024, -8.21874)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D14"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D14"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D7" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.99406, 0, -0.108832, 0, 1, 0, 0.108832, 0, 0.99406, -13.7766, 2.50024, 24.9993)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D7"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D7"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="StaticBody3D6" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(-0.0863561, 0, -0.996264, 0, 1, 0, 0.996264, 0, -0.0863561, -21.073, 2.50024, 24.1581)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="NavigationRegion3D/StaticBody3D6"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_ka3j2")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/StaticBody3D6"]
+shape = SubResource("ConvexPolygonShape3D_x54mn")
+
+[node name="Obstacle38" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.978617, 0, -0.205692, 0, 1, 0, 0.205692, 0, 0.978617, -15.6718, 2.50024, 10.0125)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle38"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle38"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle39" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.978617, 0, -0.205692, 0, 1, 0, 0.205692, 0, 0.978617, -13.5866, 2.50024, -5.56114)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle39"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle39"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle40" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.978617, 0, -0.205692, 0, 1, 0, 0.205692, 0, 0.978617, -1.4351, 2.50024, -12.1353)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle40"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle40"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle41" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.978617, 0, -0.205692, 0, 1, 0, 0.205692, 0, 0.978617, -11.2213, 2.50024, -14.1922)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle41"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle41"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle17" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 11.8014, 0.636576, -7.85044)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle17"]
+transform = Transform3D(1, 1.49012e-08, -5.96046e-08, 0, 0.886914, 0.461934, 0, -0.461934, 0.886914, -0.0427859, 0.453099, -2.63268)
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_h0el3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle17"]
+transform = Transform3D(1, 1.49012e-08, -5.96046e-08, 0, 0.886914, 0.461934, 0, -0.461934, 0.886914, -0.0427859, 0.453099, -2.63268)
+shape = SubResource("ConvexPolygonShape3D_qa3yw")
+
+[node name="Obstacle4" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.562228, 0, -0.826982, 0, 1, 0, 0.826982, 0, 0.562228, -13.8661, 2.50024, 4.62397)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle4"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle4"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle5" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.999991, 0, 0.00424117, 0, 1, 0, -0.00424117, 0, 0.999991, -11.4769, 7.50024, 3.80977)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle5"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle5"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle6" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.572919, 0, -0.819612, 0, 1, 0, 0.819612, 0, 0.572919, -9.67887, 7.50024, -0.672287)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle6"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle6"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="Obstacle7" type="StaticBody3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.923244, 0, -0.384215, 0, 1, 0, 0.384215, 0, 0.923244, -10.3167, 12.5002, 1.3937)
+collision_layer = 89
+collision_mask = 0
+metadata/_edit_group_ = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/Obstacle7"]
+material_override = SubResource("StandardMaterial3D_f3qel")
+mesh = SubResource("BoxMesh_x5ub6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/Obstacle7"]
+shape = SubResource("ConvexPolygonShape3D_ho7i2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0526943, 0)
+visible = false
+mesh = SubResource("PlaneMesh_bborq")
+
+[node name="TestTorch" parent="NavigationRegion3D" instance=ExtResource("2_egmef")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 4.97005, 2.57406, 4.18969)
+
+[node name="TestTorch2" parent="NavigationRegion3D" instance=ExtResource("2_egmef")]
+transform = Transform3D(0.642266, 0, 0.766482, 0, 1, 0, -0.766482, 0, 0.642266, -8.62926, 2.57406, -3.78954)
+
+[node name="TestTorch3" parent="NavigationRegion3D" instance=ExtResource("2_egmef")]
+transform = Transform3D(0.642266, 0, 0.766482, 0, 1, 0, -0.766482, 0, 0.642266, -20.8652, 3.09855, -22.8021)
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.962818, -0.169876, 0.210054, 0.177367, 0.188984, 0.965829, -0.203768, 0.967175, -0.151827, 2.11968, 7.34279, -3.6714)
+transform = Transform3D(-0.350035, 0.840584, 0.413393, -0.293054, -0.517426, 0.803983, 0.889715, 0.160276, 0.427454, 2.11968, 7.34279, -3.6714)
+layers = 3
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_k7lfh")
 
-[node name="Monster" parent="." instance=ExtResource("4_46tj2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.71223, 2.56024, -8.57994)
+[node name="Monster" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_46tj2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.34979, -0.0126808, 5.69954)
+player = NodePath("../Player")
+
+[node name="OmniLight3D" parent="Monster/MeshInstance3D" index="0"]
+layers = 3
 
 [node name="Player" parent="." instance=ExtResource("3_570sf")]
+transform = Transform3D(0.259443, 0, 0.965759, 0, 1, 0, -0.965759, 0, 0.259443, 17.0638, -0.0413361, 20.0503)
 
 [node name="floor" type="StaticBody3D" parent="."]
+collision_layer = 89
+collision_mask = 0
 metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
@@ -72,350 +1011,94 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0622559, 0)
 shape = SubResource("BoxShape3D_0lhur")
 
-[node name="Obstacle" type="StaticBody3D" parent="."]
-transform = Transform3D(0.74774, 0, -0.663992, 0, 1, 0, 0.663992, 0, 0.74774, -7.49646, 2.50024, -2.58484)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x5ub6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle"]
-shape = SubResource("ConvexPolygonShape3D_ho7i2")
-
-[node name="Obstacle2" type="StaticBody3D" parent="."]
-transform = Transform3D(0.887759, 0, 0.460308, 0, 1, 0, -0.460308, 0, 0.887759, 6.41128, 2.50024, 3.49622)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle2"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x5ub6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle2"]
-shape = SubResource("ConvexPolygonShape3D_ho7i2")
-
-[node name="Obstacle3" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 6.30042, 2.50024, -6.09079)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle3"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x5ub6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle3"]
-shape = SubResource("ConvexPolygonShape3D_ho7i2")
-
-[node name="Obstacle8" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 8.47694, 4.38649, -6.77559)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle8"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle8"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle9" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 8.71629, 4.14482, -6.85298)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle9"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle9"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle10" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 9.05916, 3.90532, -6.96384)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle10"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle10"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle11" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 9.32544, 3.7906, -7.04994)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle11"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle11"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle12" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 9.56478, 3.54893, -7.12733)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle12"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle12"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle13" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 9.90766, 3.30943, -7.23819)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle13"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle13"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle14" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 10.1258, 3.13272, -7.30874)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle14"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle14"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle15" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 10.3652, 2.89105, -7.38612)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle15"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle15"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle16" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 10.708, 2.65155, -7.49699)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle16"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle16"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle17" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 11.0133, 2.4321, -7.59569)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle17"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle17"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle18" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 11.2526, 2.19044, -7.67308)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle18"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle18"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle19" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 11.5955, 1.95093, -7.78394)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle19"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle19"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle20" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 11.8618, 1.83621, -7.87004)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle20"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle20"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle21" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 12.1011, 1.59455, -7.94743)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle21"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle21"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle22" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 12.444, 1.35504, -8.05829)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle22"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle22"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle23" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 12.6622, 1.17833, -8.12883)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle23"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle23"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle24" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 12.9015, 0.936664, -8.20622)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle24"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle24"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle25" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 13.2444, 0.697162, -8.31709)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle25"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle25"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle26" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 14.03, 0.445061, -8.57109)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle26"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle26"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle27" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 14.6544, 0.191148, -8.77299)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle27"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle27"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle28" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 15.4426, -0.109177, -9.02785)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle28"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle28"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle29" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, 16.2064, -0.288578, -9.27483)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle29"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x1g7b")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle29"]
-shape = SubResource("ConvexPolygonShape3D_7i54u")
-
-[node name="Obstacle4" type="StaticBody3D" parent="."]
-transform = Transform3D(0.307656, 0, -0.951498, 0, 1, 0, 0.951498, 0, 0.307656, -14.1528, 2.50024, 4.64384)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle4"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x5ub6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle4"]
-shape = SubResource("ConvexPolygonShape3D_ho7i2")
-
-[node name="Obstacle5" type="StaticBody3D" parent="."]
-transform = Transform3D(0.999991, 0, 0.00424117, 0, 1, 0, -0.00424117, 0, 0.999991, -11.4769, 7.50024, 3.80977)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle5"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x5ub6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle5"]
-shape = SubResource("ConvexPolygonShape3D_ho7i2")
-
-[node name="Obstacle6" type="StaticBody3D" parent="."]
-transform = Transform3D(0.572919, 0, -0.819612, 0, 1, 0, 0.819612, 0, 0.572919, -9.67887, 7.50024, -0.672287)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle6"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x5ub6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle6"]
-shape = SubResource("ConvexPolygonShape3D_ho7i2")
-
-[node name="Obstacle7" type="StaticBody3D" parent="."]
-transform = Transform3D(0.923244, 0, -0.384215, 0, 1, 0, 0.384215, 0, 0.923244, -10.3167, 12.5002, 1.3937)
-collision_mask = 0
-metadata/_edit_group_ = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obstacle7"]
-material_override = SubResource("StandardMaterial3D_f3qel")
-mesh = SubResource("BoxMesh_x5ub6")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obstacle7"]
-shape = SubResource("ConvexPolygonShape3D_ho7i2")
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.47828, 3.09487, 4.61324)
+layers = 3
+light_color = Color(9.62615e-08, 0.593254, 0.552585, 1)
+shadow_enabled = true
+omni_range = 5.78806
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8612, 3.09487, -0.705654)
+layers = 3
+light_negative = true
+shadow_enabled = true
+omni_range = 5.78806
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8612, 3.09487, 2.17361)
+layers = 3
+light_energy = 2.0
+light_negative = true
+shadow_enabled = true
+omni_range = 5.78806
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8612, 3.09487, 5.91507)
+layers = 3
+light_energy = 5.0
+light_negative = true
+shadow_enabled = true
+omni_range = 5.78806
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.77337, 0.999005, 17.7349)
+layers = 3
+light_color = Color(9.62615e-08, 0.593254, 0.552585, 1)
+shadow_enabled = true
+omni_range = 5.78806
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12, 2.27919, 5.94786)
+layers = 3
+light_color = Color(0.547149, 0.578408, 0, 1)
+shadow_enabled = true
+omni_range = 8.13621
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48988, 3.2695, 17.2175)
+layers = 3
+light_color = Color(0.87955, 0.283183, 0.584322, 1)
+shadow_enabled = true
+omni_range = 8.13621
+
+[node name="InterestPoint7" parent="." instance=ExtResource("9_f6trn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6805, 0.0002441, -19.4613)
+
+[node name="InterestPoint9" parent="." instance=ExtResource("9_f6trn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.06554, 0.0002441, -6.37707)
+
+[node name="InterestPoint11" parent="." instance=ExtResource("9_f6trn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.7267, 0.0002441, 3.79458)
+
+[node name="InterestPoint10" parent="." instance=ExtResource("9_f6trn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.13853, 0.000243146, 15.4844)
+
+[node name="InterestPoint17" parent="." instance=ExtResource("9_f6trn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4774, 0.000243146, -21.8665)
+
+[node name="InterestPoint18" parent="." instance=ExtResource("9_f6trn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1204, 0.000243146, -20.8113)
+
+[node name="debug_table" parent="." instance=ExtResource("8_jjekt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7534, 0.0002441, 12.4727)
+
+[node name="debug_table3" parent="." instance=ExtResource("8_jjekt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.94202, 0.0002441, 17.916)
+
+[node name="debug_table4" parent="." instance=ExtResource("8_jjekt")]
+transform = Transform3D(0.102688, 0, 0.994714, 0, 1, 0, -0.994714, 0, 0.102688, -23.7665, 0.0002441, 18.0256)
+
+[node name="debug_table5" parent="." instance=ExtResource("8_jjekt")]
+transform = Transform3D(-0.4573, 0, 0.889313, 0, 1, 0, -0.889313, 0, -0.4573, -16.5866, 0.0002441, 2.76382)
+
+[node name="debug_table2" parent="." instance=ExtResource("8_jjekt")]
+transform = Transform3D(0.705822, 0, -0.708389, 0, 1, 0, 0.708389, 0, 0.705822, -17.2167, 0.000242192, -20.7556)
+
+[node name="debug_closet" parent="." instance=ExtResource("9_fxoey")]
+transform = Transform3D(0.431724, 0, -0.902006, 0, 1, 0, 0.902006, 0, 0.431724, 8.49874, 0.0002441, 2.71698)
+
+[node name="debug_closet2" parent="." instance=ExtResource("9_fxoey")]
+transform = Transform3D(0.145738, 0, -0.989323, 0, 1, 0, 0.989323, 0, 0.145738, -22.7947, 0.000243861, -20.2332)
+
+[editable path="Monster"]

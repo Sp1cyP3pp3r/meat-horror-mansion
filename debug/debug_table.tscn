@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7dwc4gekcep1"]
+
+[ext_resource type="Script" path="res://debug/hiding_area.gd" id="1_6jvi2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_riqta"]
+size = Vector3(2.5, 0.2, 1.3)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ffd0v"]
+points = PackedVector3Array(-1.25, -0.1, -0.65, -1.25, 0.1, -0.65, 1.25, -0.1, -0.65, -1.25, -0.1, 0.65, -1.25, 0.1, 0.65, 1.25, 0.1, -0.65, 1.25, -0.1, 0.65, 1.25, 0.1, 0.65)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vp7dj"]
+size = Vector3(0.2, 1, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nr3jl"]
+size = Vector3(2.6366, 0.959424, 1.47062)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d8737"]
+size = Vector3(2.25641, 0.948242, 1)
+
+[node name="debug_table" type="StaticBody3D"]
+collision_layer = 89
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_riqta")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("ConvexPolygonShape3D_ffd0v")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14494, 0.511046, -0.398026)
+mesh = SubResource("BoxMesh_vp7dj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14494, 0.511046, 0.405418)
+mesh = SubResource("BoxMesh_vp7dj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14746, 0.511046, -0.398026)
+mesh = SubResource("BoxMesh_vp7dj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.14746, 0.511046, 0.405418)
+mesh = SubResource("BoxMesh_vp7dj")
+skeleton = NodePath("")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.538049, 0)
+radius = 1.56
+avoidance_layers = 2
+
+[node name="VisionShield" type="StaticBody3D" parent="."]
+collision_layer = 64
+collision_mask = 0
+
+[node name="Vision" type="CollisionShape3D" parent="VisionShield"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0044136, 0.504785, 0.0332069)
+shape = SubResource("BoxShape3D_nr3jl")
+
+[node name="HidingArea" type="Area3D" parent="."]
+collision_layer = 128
+collision_mask = 2
+script = ExtResource("1_6jvi2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HidingArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0144958, 0.506348, 0)
+shape = SubResource("BoxShape3D_d8737")
+
+[connection signal="body_entered" from="HidingArea" to="HidingArea" method="_on_body_entered"]
+[connection signal="body_exited" from="HidingArea" to="HidingArea" method="_on_body_exited"]

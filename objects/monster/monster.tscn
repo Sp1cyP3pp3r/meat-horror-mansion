@@ -1,87 +1,80 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdw67aph3j8dn"]
+[gd_scene load_steps=27 format=3 uid="uid://cdw67aph3j8dn"]
 
 [ext_resource type="Texture2D" uid="uid://cnfba6hy2eem3" path="res://textures/monster.png" id="1_3li0e"]
+[ext_resource type="Script" path="res://objects/monster/monster.gd" id="1_fknko"]
+[ext_resource type="Shader" path="res://materials/doom_sprite.gdshader" id="1_rqhi3"]
 [ext_resource type="Texture2D" uid="uid://cylyknw5mx7d4" path="res://textures/eyes.png" id="2_ok207"]
+[ext_resource type="Texture2D" uid="uid://dyjru8t7m0onr" path="res://textures/monster_normal.jpg" id="3_yknb2"]
+[ext_resource type="PackedScene" uid="uid://chdr7n35mnbj0" path="res://objects/monster/beehave/monster_beehave.tscn" id="7_ene68"]
+[ext_resource type="PackedScene" uid="uid://d3yo7p4o65nkh" path="res://objects/viewcone/viewcone.tscn" id="7_hy3n6"]
+[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="8_j0rr0"]
+[ext_resource type="Script" path="res://objects/monster/player_last.gd" id="9_hgppf"]
+[ext_resource type="Script" path="res://objects/monster/eyes.gd" id="9_ul2wq"]
+[ext_resource type="Script" path="res://objects/monster/door_detection.gd" id="11_k6nvx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ygsd8"]
+render_priority = 0
+shader = ExtResource("1_rqhi3")
+shader_parameter/albedo = ExtResource("1_3li0e")
+shader_parameter/normalmap = ExtResource("3_yknb2")
+shader_parameter/directions = 4
+shader_parameter/frame_count = 2
+shader_parameter/frame = 0
+shader_parameter/scale = 1.0
+shader_parameter/y_billboard = true
+shader_parameter/use_alpha = true
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_d14o6"]
+size = Vector2(512, 512)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y78im"]
+render_priority = 0
+shader = ExtResource("1_rqhi3")
+shader_parameter/albedo = ExtResource("2_ok207")
+shader_parameter/directions = 4
+shader_parameter/frame_count = 2
+shader_parameter/frame = 0
+shader_parameter/scale = 1.0
+shader_parameter/y_billboard = true
+shader_parameter/use_alpha = true
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mo6oo"]
+size = Vector2(512, 512)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_eyapl"]
+height = 1.8
 
 [sub_resource type="AnimationRootNode" id="AnimationRootNode_uy6fc"]
+
+[sub_resource type="Animation" id="Animation_qbwb5"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_oxevq"]
 resource_name = "Idle"
 length = 0.5
 loop_mode = 1
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Eyes:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.01, -0.25, 0, 0.25, 0, -0.01, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Eyes:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -0.01, -0.25, 0, 0.25, 0, 0.01, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.233333, 0.4, 0.5)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Eyes:position:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-0.01, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Eyes:scale:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1.01, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.166667, 0.5)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Eyes:scale:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0.98, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.3, 0.5)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Eyes:scale:z")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rkvsc"]
+_data = {
+&"Idle": SubResource("Animation_oxevq"),
+&"RESET": SubResource("Animation_qbwb5")
 }
 
-[sub_resource type="Animation" id="Animation_qbwb5"]
+[sub_resource type="SphereMesh" id="SphereMesh_wtxaj"]
+flip_faces = true
+radius = 0.2
+height = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m20vs"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_rdk0d"]
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Eyes:position:x")
+tracks/0/path = NodePath(".:position:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -92,81 +85,109 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Eyes:position:y")
+tracks/1/path = NodePath(".:position:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(6.81675, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Eyes:position:z")
+tracks/2/path = NodePath(".:position:z")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(-0.01, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Eyes:scale:x")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/4/type = "bezier"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Eyes:scale:y")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/5/type = "bezier"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Eyes:scale:z")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rkvsc"]
+[sub_resource type="Animation" id="Animation_qtgm0"]
+resource_name = "tangle"
+length = 3.0
+loop_mode = 2
+step = 0.25
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -2, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2, 3)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(6.81675, -0.25, 0, 0.25, 0, 5, -0.25, 0, 0.25, 0, 6.817, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 3)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.75, 1.5, 2.25, 3)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rcm82"]
 _data = {
-&"RESET": SubResource("Animation_qbwb5"),
-&"Idle": SubResource("Animation_oxevq")
+&"tangle": SubResource("Animation_qtgm0"),
+&"RESET": SubResource("Animation_rdk0d")
 }
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_aihwb"]
-height = 4.83029
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_l15xv"]
+radius = 1.60847
 
-[node name="Monster" type="CharacterBody3D"]
+[node name="Monster" type="CharacterBody3D" node_paths=PackedStringArray("nav_agent")]
+collision_layer = 4
+collision_mask = 10
 platform_floor_layers = 4294901768
 platform_wall_layers = 8
+script = ExtResource("1_fknko")
+nav_agent = NodePath("NavigationAgent3D")
 
 [node name="Body" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.57248, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.52399, 0)
+material_override = SubResource("ShaderMaterial_ygsd8")
+cast_shadow = 0
 billboard = 2
-texture = ExtResource("1_3li0e")
+shaded = true
+double_sided = false
+texture = SubResource("PlaceholderTexture2D_d14o6")
 
-[node name="Eyes" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.01)
-billboard = 2
-texture = ExtResource("2_ok207")
+[node name="Eyes" type="Sprite3D" parent="Body"]
+material_override = SubResource("ShaderMaterial_y78im")
+cast_shadow = 0
+transparent = false
+shaded = true
+double_sided = false
+texture = SubResource("PlaceholderTexture2D_mo6oo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_eyapl")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+target_desired_distance = 2.0
+avoidance_enabled = true
+radius = 1.0
+avoidance_mask = 3
+debug_enabled = true
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationRootNode_uy6fc")
@@ -178,5 +199,82 @@ libraries = {
 }
 autoplay = "Idle"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_aihwb")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.81675, 0)
+visible = false
+mesh = SubResource("SphereMesh_wtxaj")
+surface_material_override/0 = SubResource("StandardMaterial3D_m20vs")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D"]
+omni_range = 6.42463
+omni_attenuation = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MeshInstance3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_rcm82")
+}
+autoplay = "tangle"
+
+[node name="MonsterBeehave" parent="." node_paths=PackedStringArray("blackboard", "actor") instance=ExtResource("7_ene68")]
+actor_node_path = NodePath("..")
+blackboard = NodePath("../Blackboard")
+actor = NodePath("..")
+
+[node name="Blackboard" type="Node" parent="."]
+script = ExtResource("8_j0rr0")
+
+[node name="PlayerLast" type="Node3D" parent="."]
+script = ExtResource("9_hgppf")
+
+[node name="PlayerLastRay" type="RayCast3D" parent="PlayerLast"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.227389, 0)
+enabled = false
+target_position = Vector3(0, 0, -5)
+collision_mask = 9
+
+[node name="Eyes" type="Node3D" parent="."]
+script = ExtResource("9_ul2wq")
+
+[node name="Viewcone" parent="Eyes" instance=ExtResource("7_hy3n6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+view_range = 30.0
+view_clearance = 89.0
+
+[node name="ViewconeRight" parent="Eyes" instance=ExtResource("7_hy3n6")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 3, 0)
+view_range = 15.0
+view_clearance = 80.0
+
+[node name="ViewconeLeft" parent="Eyes" instance=ExtResource("7_hy3n6")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 3, 0)
+view_range = 15.0
+view_clearance = 80.0
+
+[node name="ViewconeBack" parent="Eyes" instance=ExtResource("7_hy3n6")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 3, 0)
+view_range = 5.0
+view_clearance = 60.0
+
+[node name="DoorDetection" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 384
+script = ExtResource("11_k6nvx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoorDetection"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_l15xv")
+
+[node name="TemperMeter" type="Timer" parent="DoorDetection"]
+process_callback = 0
+one_shot = true
+
+[connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]
+[connection signal="end_navigation" from="MonsterBeehave" to="." method="end_navigation"]
+[connection signal="start_navigation" from="MonsterBeehave" to="." method="start_navigation"]
+[connection signal="see_enemy" from="Eyes/Viewcone" to="Eyes" method="see_interrupt"]
+[connection signal="see_enemy" from="Eyes/ViewconeRight" to="Eyes" method="see_interrupt"]
+[connection signal="see_enemy" from="Eyes/ViewconeLeft" to="Eyes" method="see_interrupt"]
+[connection signal="see_enemy" from="Eyes/ViewconeBack" to="Eyes" method="see_interrupt"]
+[connection signal="body_entered" from="DoorDetection" to="DoorDetection" method="_on_body_entered"]
+[connection signal="body_exited" from="DoorDetection" to="DoorDetection" method="_on_body_exited"]
+[connection signal="timeout" from="DoorDetection/TemperMeter" to="DoorDetection" method="_on_temper_meter_timeout"]

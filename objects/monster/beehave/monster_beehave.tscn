@@ -1,0 +1,444 @@
+[gd_scene load_steps=25 format=3 uid="uid://chdr7n35mnbj0"]
+
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="2_j6ut1"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="3_75uv6"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/failer.gd" id="3_gvp5w"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="4_7ltq1"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="4_wmxm5"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/until_fail.gd" id="5_518ha"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="6_evtvn"]
+[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/limiter.gd" id="6_j14rb"]
+
+[sub_resource type="GDScript" id="GDScript_duvkq"]
+script/source = "extends BeehaveTree
+
+signal start_navigation
+signal end_navigation
+"
+
+[sub_resource type="GDScript" id="GDScript_456oe"]
+script/source = "extends ConditionLeaf
+
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	actor.interrupt = false
+	if actor.eyes.sees_player():
+		return SUCCESS
+	return FAILURE
+"
+
+[sub_resource type="GDScript" id="GDScript_7ro0v"]
+script/source = "extends ActionLeaf
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	var point = actor.player.global_position
+	actor.nav_target = point
+	actor.last_seen_point = point
+	actor.last_velocity = actor.velocity.normalized()
+	return SUCCESS
+"
+
+[sub_resource type="GDScript" id="GDScript_4yggg"]
+script/source = "extends ConditionLeaf
+
+var nav
+
+func before_run(actor: Node, blackboard: Blackboard) -> void:
+	nav = actor.nav_agent as NavigationAgent3D
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	if nav.is_target_reachable():
+		return SUCCESS
+	return FAILURE
+"
+
+[sub_resource type="GDScript" id="GDScript_kr0l5"]
+script/source = "extends ActionLeaf
+
+signal no_fail
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	owner.start_navigation.emit()
+	no_fail.emit()
+	return SUCCESS
+"
+
+[sub_resource type="GDScript" id="GDScript_u00bu"]
+script/source = "extends ConditionLeaf
+
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	var point = actor.last_seen_point
+	actor.last_seen_point = Vector3.ZERO
+	if point != Vector3.ZERO:
+		actor.nav_target = point
+		return SUCCESS
+	return FAILURE
+"
+
+[sub_resource type="GDScript" id="GDScript_d6an5"]
+script/source = "extends ConditionLeaf
+
+var nav : NavigationAgent3D
+
+func before_run(actor: Node, blackboard: Blackboard) -> void:
+	nav = actor.nav_agent as NavigationAgent3D
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	if actor.interrupt:
+		%SelectorComposite.interrupt(actor, blackboard)
+	if not nav.is_navigation_finished():
+		return RUNNING
+	return SUCCESS
+
+func interrupt(actor: Node, blackboard: Blackboard) -> void:
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_wqr3o"]
+script/source = "extends ActionLeaf
+
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	owner.end_navigation.emit()
+	return FAILURE
+"
+
+[sub_resource type="GDScript" id="GDScript_kltsw"]
+script/source = "extends ConditionLeaf
+
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	if actor.last_velocity == Vector3.ZERO:
+		return FAILURE
+	
+	return SUCCESS
+"
+
+[sub_resource type="GDScript" id="GDScript_gil4f"]
+script/source = "extends ActionLeaf
+
+var last : Last
+
+func before_run(actor: Node, blackboard: Blackboard) -> void:
+	last = actor.player_last
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	var hit = last.get_hit_ray()
+	var point : Vector3
+	var vel = actor.last_velocity
+	
+	actor.last_velocity = Vector3.ZERO
+	
+	if hit is bool:
+		if hit == false:
+			point = actor.global_position + vel * last.ray_length/2
+	else:
+		point = hit
+	actor.nav_target = point
+	return SUCCESS
+"
+
+[sub_resource type="GDScript" id="GDScript_n84wq"]
+script/source = "extends ConditionLeaf
+
+var value
+
+func before_run(actor: Node, blackboard: Blackboard) -> void:
+	var interests = get_tree().get_nodes_in_group(\"InterestPoints\")
+	if interests.is_empty():
+		value = FAILURE
+	else:
+		value = SUCCESS
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	return value
+"
+
+[sub_resource type="GDScript" id="GDScript_w60yg"]
+script/source = "extends ActionLeaf
+
+@export var limiter : int = 2
+var nav
+var interests : Array
+var recent_interest : Array
+
+
+func before_run(actor: Node, blackboard: Blackboard) -> void:
+	nav = actor.nav_agent as NavigationAgent3D
+	interests = get_tree().get_nodes_in_group(\"InterestPoints\")
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	if interests.is_empty():
+		return FAILURE
+	
+	if recent_interest.size() > limiter:
+		recent_interest.remove_at(0)
+	
+	var needed_interests = interests.duplicate()
+	if not recent_interest.is_empty():
+		for point in recent_interest:
+			needed_interests.erase(point)
+	
+	if needed_interests.is_empty():
+		return FAILURE
+	
+	var pos : Vector3 = actor.global_position
+	var point_pos : Vector3
+	var near_point = needed_interests[0]
+	for point in needed_interests:
+		point_pos = point.global_position
+		var dist = pos.distance_to(point_pos)
+		var near_dist = pos.distance_to(near_point.global_position)
+		if dist < near_dist:
+			near_point = point
+	recent_interest.append(near_point)
+	actor.nav_target = near_point.global_position
+	return SUCCESS
+"
+
+[sub_resource type="GDScript" id="GDScript_o6a3t"]
+script/source = "extends ActionLeaf
+
+@export var range : float = 5
+var nav
+var map
+var layers
+
+func before_run(actor: Node, blackboard: Blackboard) -> void:
+	nav = actor.nav_agent as NavigationAgent3D
+	map = NavigationServer3D.agent_get_map(nav)
+	layers = pow(2, 1-1)
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	var point : Vector3 = NavigationServer3D.map_get_random_point(map, layers, true)
+	var dist = point.distance_to(actor.global_position)
+	
+	while dist > range:
+		point = NavigationServer3D.map_get_random_point(map, layers, true)
+		dist = point.distance_to(actor.global_position)
+	
+	
+	if point:
+		actor.nav_target = point
+		return SUCCESS
+	return FAILURE
+"
+
+[sub_resource type="GDScript" id="GDScript_t8jjk"]
+script/source = "extends ActionLeaf
+
+signal fail_safe
+
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	fail_safe.emit()
+	return FAILURE
+"
+
+[sub_resource type="GDScript" id="GDScript_lvd42"]
+script/source = "extends ActionLeaf
+
+var fail : bool = false
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	if fail:
+		actor.nav_target = actor.fail_safe_target
+		return SUCCESS
+	return FAILURE
+
+func accept_fail():
+	fail = true
+
+func accept_no_fail():
+	fail = false
+"
+
+[sub_resource type="GDScript" id="GDScript_nfyoj"]
+script/source = "extends ActionLeaf
+
+
+func tick(actor: Node, blackboard: Blackboard) -> int:
+	actor.global_position = actor.fail_safe_target
+	return SUCCESS
+"
+
+[node name="MonsterBeehave" type="Node"]
+script = SubResource("GDScript_duvkq")
+
+[node name="SelectorComposite" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_wmxm5")
+
+[node name="Hunt" type="Node" parent="SelectorComposite"]
+script = ExtResource("2_j6ut1")
+
+[node name="HasPlayerInSight" type="Node" parent="SelectorComposite/Hunt"]
+script = SubResource("GDScript_456oe")
+
+[node name="GetPlayerPosition" type="Node" parent="SelectorComposite/Hunt"]
+script = SubResource("GDScript_7ro0v")
+
+[node name="IsPointValid" type="Node" parent="SelectorComposite/Hunt"]
+script = SubResource("GDScript_4yggg")
+
+[node name="StartNavigation" type="Node" parent="SelectorComposite/Hunt"]
+script = SubResource("GDScript_kr0l5")
+
+[node name="Search" type="Node" parent="SelectorComposite"]
+script = ExtResource("4_wmxm5")
+
+[node name="LastSeen" type="Node" parent="SelectorComposite/Search"]
+script = ExtResource("2_j6ut1")
+
+[node name="HasLastSeenPos" type="Node" parent="SelectorComposite/Search/LastSeen"]
+script = SubResource("GDScript_u00bu")
+
+[node name="IsPointValid" type="Node" parent="SelectorComposite/Search/LastSeen"]
+script = SubResource("GDScript_4yggg")
+
+[node name="StartNavigation" type="Node" parent="SelectorComposite/Search/LastSeen"]
+script = SubResource("GDScript_kr0l5")
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorComposite/Search/LastSeen"]
+script = ExtResource("4_7ltq1")
+wait_time = 8.0
+
+[node name="AwaitArrival" type="Node" parent="SelectorComposite/Search/LastSeen/TimeLimiterDecorator"]
+script = SubResource("GDScript_d6an5")
+
+[node name="StopNavigation" type="Node" parent="SelectorComposite/Search/LastSeen"]
+script = SubResource("GDScript_wqr3o")
+
+[node name="FollowTrail" type="Node" parent="SelectorComposite/Search"]
+script = ExtResource("2_j6ut1")
+
+[node name="IsRayLastVel" type="Node" parent="SelectorComposite/Search/FollowTrail"]
+script = SubResource("GDScript_kltsw")
+
+[node name="GetVelPoint" type="Node" parent="SelectorComposite/Search/FollowTrail"]
+script = SubResource("GDScript_gil4f")
+
+[node name="StartNavigation" type="Node" parent="SelectorComposite/Search/FollowTrail"]
+script = SubResource("GDScript_kr0l5")
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorComposite/Search/FollowTrail"]
+script = ExtResource("4_7ltq1")
+wait_time = 8.0
+
+[node name="AwaitArrival" type="Node" parent="SelectorComposite/Search/FollowTrail/TimeLimiterDecorator"]
+script = SubResource("GDScript_d6an5")
+
+[node name="StopNavigation" type="Node" parent="SelectorComposite/Search/FollowTrail"]
+script = SubResource("GDScript_wqr3o")
+
+[node name="Wandering" type="Node" parent="SelectorComposite"]
+script = ExtResource("4_wmxm5")
+
+[node name="CooldownDecorator" type="Node" parent="SelectorComposite/Wandering"]
+script = ExtResource("3_75uv6")
+wait_time = 5.0
+
+[node name="PointOfInterest" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator"]
+script = ExtResource("2_j6ut1")
+
+[node name="IsInterest" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator/PointOfInterest"]
+script = SubResource("GDScript_n84wq")
+
+[node name="InterestPoint" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator/PointOfInterest"]
+script = SubResource("GDScript_w60yg")
+
+[node name="IsPointValid" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator/PointOfInterest"]
+script = SubResource("GDScript_4yggg")
+
+[node name="StartNavigation" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator/PointOfInterest"]
+script = SubResource("GDScript_kr0l5")
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator/PointOfInterest"]
+script = ExtResource("4_7ltq1")
+wait_time = 8.0
+
+[node name="AwaitArrival" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator/PointOfInterest/TimeLimiterDecorator"]
+script = SubResource("GDScript_d6an5")
+
+[node name="StopNavigation" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator/PointOfInterest"]
+script = SubResource("GDScript_wqr3o")
+
+[node name="CooldownDecorator2" type="Node" parent="SelectorComposite/Wandering"]
+script = ExtResource("3_75uv6")
+wait_time = 5.0
+
+[node name="RandomPoint" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2"]
+script = ExtResource("2_j6ut1")
+
+[node name="SelectorComposite" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint"]
+script = ExtResource("4_wmxm5")
+
+[node name="LimiterDecorator" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/SelectorComposite"]
+script = ExtResource("6_j14rb")
+max_count = 5.0
+
+[node name="UntilFailDecorator" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/SelectorComposite/LimiterDecorator"]
+script = ExtResource("5_518ha")
+
+[node name="InverterDecorator" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/SelectorComposite/LimiterDecorator/UntilFailDecorator"]
+script = ExtResource("6_evtvn")
+
+[node name="SelectorComposite" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/SelectorComposite/LimiterDecorator/UntilFailDecorator/InverterDecorator"]
+script = ExtResource("4_wmxm5")
+
+[node name="AlwaysFailDecorator" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/SelectorComposite/LimiterDecorator/UntilFailDecorator/InverterDecorator/SelectorComposite"]
+script = ExtResource("3_gvp5w")
+
+[node name="GetRandomPoint" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/SelectorComposite/LimiterDecorator/UntilFailDecorator/InverterDecorator/SelectorComposite/AlwaysFailDecorator"]
+script = SubResource("GDScript_o6a3t")
+
+[node name="IsPointValid" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/SelectorComposite/LimiterDecorator/UntilFailDecorator/InverterDecorator/SelectorComposite"]
+script = SubResource("GDScript_4yggg")
+
+[node name="FailSafe" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/SelectorComposite"]
+script = SubResource("GDScript_t8jjk")
+
+[node name="StartNavigation" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint"]
+script = SubResource("GDScript_kr0l5")
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint"]
+script = ExtResource("4_7ltq1")
+wait_time = 10.0
+
+[node name="AwaitArrival" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/TimeLimiterDecorator"]
+script = SubResource("GDScript_d6an5")
+
+[node name="StopNavigation" type="Node" parent="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint"]
+script = SubResource("GDScript_wqr3o")
+
+[node name="FailSafe" type="Node" parent="SelectorComposite/Wandering"]
+script = ExtResource("2_j6ut1")
+
+[node name="FailSafePoint" type="Node" parent="SelectorComposite/Wandering/FailSafe"]
+script = SubResource("GDScript_lvd42")
+
+[node name="StartNavigation" type="Node" parent="SelectorComposite/Wandering/FailSafe"]
+script = SubResource("GDScript_kr0l5")
+
+[node name="SelectorComposite" type="Node" parent="SelectorComposite/Wandering/FailSafe"]
+script = ExtResource("4_wmxm5")
+
+[node name="TimeLimiterDecorator" type="Node" parent="SelectorComposite/Wandering/FailSafe/SelectorComposite"]
+script = ExtResource("4_7ltq1")
+wait_time = 8.0
+
+[node name="AwaitArrival" type="Node" parent="SelectorComposite/Wandering/FailSafe/SelectorComposite/TimeLimiterDecorator"]
+script = SubResource("GDScript_d6an5")
+
+[node name="Teleport" type="Node" parent="SelectorComposite/Wandering/FailSafe/SelectorComposite"]
+script = SubResource("GDScript_nfyoj")
+
+[node name="StopNavigation" type="Node" parent="SelectorComposite/Wandering/FailSafe"]
+script = SubResource("GDScript_wqr3o")
+
+[connection signal="no_fail" from="SelectorComposite/Hunt/StartNavigation" to="SelectorComposite/Wandering/FailSafe/FailSafePoint" method="accept_no_fail"]
+[connection signal="no_fail" from="SelectorComposite/Search/LastSeen/StartNavigation" to="SelectorComposite/Wandering/FailSafe/FailSafePoint" method="accept_no_fail"]
+[connection signal="no_fail" from="SelectorComposite/Search/FollowTrail/StartNavigation" to="SelectorComposite/Wandering/FailSafe/FailSafePoint" method="accept_no_fail"]
+[connection signal="fail_safe" from="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/SelectorComposite/FailSafe" to="SelectorComposite/Wandering/FailSafe/FailSafePoint" method="accept_fail"]
+[connection signal="no_fail" from="SelectorComposite/Wandering/CooldownDecorator2/RandomPoint/StartNavigation" to="SelectorComposite/Wandering/FailSafe/FailSafePoint" method="accept_no_fail"]

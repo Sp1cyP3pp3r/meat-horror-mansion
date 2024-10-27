@@ -1,10 +1,12 @@
-[gd_scene load_steps=36 format=3 uid="uid://c1n8xrti8afpc"]
+[gd_scene load_steps=38 format=3 uid="uid://c1n8xrti8afpc"]
 
 [ext_resource type="Script" path="res://objects/player/player.gd" id="1_oa43o"]
 [ext_resource type="PackedScene" uid="uid://c60wqnmed5dvi" path="res://objects/health/health.tscn" id="2_ohtop"]
 [ext_resource type="Script" path="res://addons/finite_state_machine/scripts/finite_state_machine.gd" id="2_p4q1k"]
+[ext_resource type="PackedScene" uid="uid://bn17v46kmuicl" path="res://objects/player/light_detector.tscn" id="2_topr5"]
 [ext_resource type="Script" path="res://objects/player/head.gd" id="3_kj3jh"]
 [ext_resource type="Script" path="res://objects/player/legs.gd" id="3_sof65"]
+[ext_resource type="Script" path="res://objects/player/interaction_ray.gd" id="5_3ho8o"]
 [ext_resource type="Script" path="res://objects/player/StateMachine/Idle.gd" id="5_6pvtv"]
 [ext_resource type="Script" path="res://objects/player/StateMachine/Run.gd" id="6_q5vx6"]
 [ext_resource type="Script" path="res://objects/player/StateMachine/Walk.gd" id="7_ivjc6"]
@@ -159,6 +161,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.300112, 0)
 shape = SubResource("CapsuleShape3D_p17bk")
 disabled = true
 
+[node name="LightDetector" parent="." instance=ExtResource("2_topr5")]
+unique_name_in_owner = true
+
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 script = ExtResource("3_kj3jh")
@@ -177,9 +182,18 @@ cull_mask = 1048573
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Head/Camera"]
 transform = Transform3D(1, 2.98024e-08, 7.91442e-09, -2.98024e-08, 1, -6.75203e-09, -7.91442e-09, 6.75203e-09, 1, 0, 0, 0)
+visible = false
 light_color = Color(0.820366, 0.820366, 0.820366, 1)
 light_energy = 0.8
+light_cull_mask = 4294967293
 omni_range = 15.0
+
+[node name="InteractionRay" type="RayCast3D" parent="Head/Camera"]
+transform = Transform3D(1, 2.98024e-08, 7.91442e-09, -2.98024e-08, 1, -6.75203e-09, -7.91442e-09, 6.75203e-09, 1, 0, 0, 0)
+target_position = Vector3(0, 0, -2)
+collision_mask = 256
+hit_from_inside = true
+script = ExtResource("5_3ho8o")
 
 [node name="Legs" type="Node3D" parent="."]
 script = ExtResource("3_sof65")
@@ -273,13 +287,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.682468, 0.315204, 0.588543, 1)
-
-[node name="CurrentState" type="Label" parent="CanvasLayer"]
-offset_left = 72.0
-offset_top = 511.0
-offset_right = 112.0
-offset_bottom = 534.0
-text = "State"
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
 offset_left = 832.0

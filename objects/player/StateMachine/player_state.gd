@@ -120,6 +120,6 @@ func tween_camera_uncrouch() -> void:
 
 func handle_uncrouch() -> void:
 	if player.is_multiplayer_authority():
-		if Input.is_action_just_pressed("crouch") or Input.is_action_just_pressed("jump"):
+		if Input.is_action_just_pressed("uncrouch") or Input.is_action_just_pressed("jump"):
 			if player.head.head_free_space():
 				change_state("Walk")

@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bfebbpescm613"]
+
+[ext_resource type="Texture2D" uid="uid://cwjmgwjg6hpr3" path="res://textures/wood_planks.jpg" id="1_get1h"]
+
+[resource]
+albedo_texture = ExtResource("1_get1h")
+metallic_specular = 0.0
+texture_filter = 2

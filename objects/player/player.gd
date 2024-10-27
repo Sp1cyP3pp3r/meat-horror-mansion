@@ -9,7 +9,7 @@ signal entity_death()
 @export var health : Health
 
 @export var stats : Dictionary[String, float] = {
-	speed = 2.25,
+	speed = 5, #2.25,
 	max_hp = 100.0,
 	acceleration = 18.0,
 	gravity = 15.0,
@@ -33,8 +33,8 @@ func _physics_process(delta: float) -> void:
 	var pre_velocity = velocity
 	velocity = pre_velocity + additional_velocity
 	
-	$CanvasLayer/CurrentState.text = str(velocity.y)
-
+func get_light_level() -> float:
+	return %LightDetector.light_level
 
 func death(killer = self):
 	entity_death.emit(self)

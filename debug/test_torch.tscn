@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2f4400kxjxnw"]
+
+[ext_resource type="Texture2D" uid="uid://diegu5a0mgcfq" path="res://textures/torch_test.png" id="1_8u0iv"]
+
+[node name="TestTorch" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.0898017, 0, 0, 0, 0.0898017, 0, 0, 0, 0.0898017, 0, 0.495755, 0)
+shaded = true
+texture = ExtResource("1_8u0iv")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(-3.92536e-09, 0, 0.0898017, 0, 0.0898017, 0, -0.0898017, 0, -3.92536e-09, 0, 0.495755, 0)
+shaded = true
+texture = ExtResource("1_8u0iv")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0165398, 1.05619, -0.016678)
+layers = 3
+light_color = Color(0.988692, 0.734641, 0.475668, 1)
+light_energy = 2.0
+shadow_enabled = true
+omni_range = 10.0
+omni_attenuation = 0.0
