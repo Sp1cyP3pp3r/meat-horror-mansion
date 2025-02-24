@@ -1,16 +1,16 @@
 [gd_scene load_steps=27 format=3 uid="uid://cdw67aph3j8dn"]
 
 [ext_resource type="Texture2D" uid="uid://cnfba6hy2eem3" path="res://textures/monster.png" id="1_3li0e"]
-[ext_resource type="Script" path="res://objects/monster/monster.gd" id="1_fknko"]
-[ext_resource type="Shader" path="res://materials/doom_sprite.gdshader" id="1_rqhi3"]
+[ext_resource type="Script" uid="uid://ds5w78m5qayqc" path="res://objects/monster/monster.gd" id="1_fknko"]
+[ext_resource type="Shader" uid="uid://b11xix7fk8f1f" path="res://materials/doom_sprite.gdshader" id="1_rqhi3"]
 [ext_resource type="Texture2D" uid="uid://cylyknw5mx7d4" path="res://textures/eyes.png" id="2_ok207"]
 [ext_resource type="Texture2D" uid="uid://dyjru8t7m0onr" path="res://textures/monster_normal.jpg" id="3_yknb2"]
 [ext_resource type="PackedScene" uid="uid://chdr7n35mnbj0" path="res://objects/monster/beehave/monster_beehave.tscn" id="7_ene68"]
 [ext_resource type="PackedScene" uid="uid://d3yo7p4o65nkh" path="res://objects/viewcone/viewcone.tscn" id="7_hy3n6"]
-[ext_resource type="Script" path="res://addons/beehave/blackboard.gd" id="8_j0rr0"]
-[ext_resource type="Script" path="res://objects/monster/player_last.gd" id="9_hgppf"]
-[ext_resource type="Script" path="res://objects/monster/eyes.gd" id="9_ul2wq"]
-[ext_resource type="Script" path="res://objects/monster/door_detection.gd" id="11_k6nvx"]
+[ext_resource type="Script" uid="uid://dms7bx4resq7b" path="res://addons/beehave/blackboard.gd" id="8_j0rr0"]
+[ext_resource type="Script" uid="uid://v5ghcefyyp4r" path="res://objects/monster/player_last.gd" id="9_hgppf"]
+[ext_resource type="Script" uid="uid://bpc1mecsofhqm" path="res://objects/monster/eyes.gd" id="9_ul2wq"]
+[ext_resource type="Script" uid="uid://6lfapvurrpc0" path="res://objects/monster/door_detection.gd" id="11_k6nvx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ygsd8"]
 render_priority = 0
@@ -46,13 +46,13 @@ height = 1.8
 
 [sub_resource type="AnimationRootNode" id="AnimationRootNode_uy6fc"]
 
-[sub_resource type="Animation" id="Animation_qbwb5"]
-length = 0.001
-
 [sub_resource type="Animation" id="Animation_oxevq"]
 resource_name = "Idle"
 length = 0.5
 loop_mode = 1
+
+[sub_resource type="Animation" id="Animation_qbwb5"]
+length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rkvsc"]
 _data = {
@@ -68,42 +68,6 @@ height = 0.4
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m20vs"]
 emission_enabled = true
 emission = Color(1, 1, 1, 1)
-
-[sub_resource type="Animation" id="Animation_rdk0d"]
-length = 0.001
-tracks/0/type = "bezier"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position:x")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(6.81675, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:position:z")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
 
 [sub_resource type="Animation" id="Animation_qtgm0"]
 resource_name = "tangle"
@@ -144,10 +108,46 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.75, 1.5, 2.25, 3)
 }
 
+[sub_resource type="Animation" id="Animation_rdk0d"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(6.81675, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rcm82"]
 _data = {
-&"tangle": SubResource("Animation_qtgm0"),
-&"RESET": SubResource("Animation_rdk0d")
+&"RESET": SubResource("Animation_rdk0d"),
+&"tangle": SubResource("Animation_qtgm0")
 }
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_l15xv"]

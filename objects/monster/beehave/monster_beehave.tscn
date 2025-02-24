@@ -1,13 +1,13 @@
 [gd_scene load_steps=25 format=3 uid="uid://chdr7n35mnbj0"]
 
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/sequence.gd" id="2_j6ut1"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="3_75uv6"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/failer.gd" id="3_gvp5w"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="4_7ltq1"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/composites/selector.gd" id="4_wmxm5"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/until_fail.gd" id="5_518ha"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/inverter.gd" id="6_evtvn"]
-[ext_resource type="Script" path="res://addons/beehave/nodes/decorators/limiter.gd" id="6_j14rb"]
+[ext_resource type="Script" uid="uid://dta7e4ytbb8up" path="res://addons/beehave/nodes/composites/sequence.gd" id="2_j6ut1"]
+[ext_resource type="Script" uid="uid://r8l4aqamhsq1" path="res://addons/beehave/nodes/decorators/cooldown.gd" id="3_75uv6"]
+[ext_resource type="Script" uid="uid://clrcd00jrdsfn" path="res://addons/beehave/nodes/decorators/failer.gd" id="3_gvp5w"]
+[ext_resource type="Script" uid="uid://chdsq6uc4kfdl" path="res://addons/beehave/nodes/decorators/time_limiter.gd" id="4_7ltq1"]
+[ext_resource type="Script" uid="uid://d21qa854guqd1" path="res://addons/beehave/nodes/composites/selector.gd" id="4_wmxm5"]
+[ext_resource type="Script" uid="uid://m5rpoxkbkyfa" path="res://addons/beehave/nodes/decorators/until_fail.gd" id="5_518ha"]
+[ext_resource type="Script" uid="uid://dqg5uguxdud4s" path="res://addons/beehave/nodes/decorators/inverter.gd" id="6_evtvn"]
+[ext_resource type="Script" uid="uid://ujh4u70k5wgo" path="res://addons/beehave/nodes/decorators/limiter.gd" id="6_j14rb"]
 
 [sub_resource type="GDScript" id="GDScript_duvkq"]
 script/source = "extends BeehaveTree

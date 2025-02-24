@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3yo7p4o65nkh"]
 
-[ext_resource type="Script" path="res://objects/viewcone/viewcone.gd" id="1_s5fdn"]
+[ext_resource type="Script" uid="uid://clkscy4w632qi" path="res://objects/viewcone/viewcone.gd" id="1_s5fdn"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_xb7lh"]
 resource_local_to_scene = true
